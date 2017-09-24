@@ -1,5 +1,6 @@
 'use strict';
-const { Student, Campus } = require('./index').models;
+const db = require('./');
+const { Student, Campus } = require('./').models;
 
 const seed = () => {
   return Promise.all([
@@ -14,10 +15,10 @@ const seed = () => {
     Campus.create({ name: 'Campus 4' })
   ])
   .then(([ eren, mikasa, armin, annie, erwin, c1, c2, c3 ]) => {
-    eren.addCampus(c1);
-    mikasa.addCampus(c1);
-    armin.addCampus(c2);
-    annie.addCampus(c3);
+    c1.addStudent(eren);
+    c1.addStudent(mikasa);
+    c2.addStudent(armin);
+    c3.addStudent(erwin);
   })
   .catch(err => console.log(err));
 };
@@ -25,7 +26,7 @@ const seed = () => {
 const sync = () => {
   db.sync({ force: true })
     .then(seed)
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
 };
 
 sync();

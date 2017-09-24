@@ -24,7 +24,12 @@ const Campus = conn.define('campus', {
 Campus.hasMany(Student);
 Student.belongsTo(Campus);
 
+const sync = () => {
+  return conn.sync({ force: true });
+};
+
 module.exports = {
+  sync,
   models: {
     Student,
     Campus
