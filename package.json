@@ -2,11 +2,11 @@
   "name": "senior-enrichment-project",
   "version": "1.0.0",
   "description": "A review time project.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "postinstall": "npm run webpack",
     "webpack": "./node_modules/webpack/bin/webpack.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nodemon ./node_modules/mocha/bin/mocha",
     "start:dev": "npm run webpack -- -w & nodemon --ignore src/ --ignore dist/ server.js",
     "seed": "node ./db/seed.js"
   },
@@ -32,6 +32,9 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3",
+    "supertest": "^3.0.0",
     "webpack": "^3.6.0"
   }
 }
