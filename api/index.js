@@ -1,5 +1,4 @@
 'use strict';
-
 const app = require('express').Router();
 const db = require('../db');
 const { Student, Campus } = db.models;

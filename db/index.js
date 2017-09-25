@@ -1,5 +1,4 @@
 'use strict';
-
 const conn = require('./conn');
 
 const Student = conn.define('student', {
