@@ -1,8 +1,13 @@
 'use strict';
 
-const router = require('express').Router();
+const app = require('express').Router();
 const db = require('../db');
+const { Student, Campus } = db.models;
 
-router.get('/hello', (req, res, next) => res.send({ hello: 'world'}));
+app.get('/campuses', (req, res, next) => {
+  Campus.findAll()
+    .then(campuses => res.send(campuses))
+    .catch(next)
+});
 
-module.exports = router;
+module.exports = app;
