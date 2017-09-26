@@ -10,7 +10,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/:id', (req, res, next) => {
-  Student.findById(req.params.id)
+  Student.findById(req.params.id, { include: [ db.models.Campus ] })
     .then(student => res.send(student))
     .catch(next)
 });

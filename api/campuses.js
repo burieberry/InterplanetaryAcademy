@@ -1,15 +1,16 @@
 'use strict';
 const app = require('express').Router();
-const { Campus } = require('../db').models;
+const db = require('../db');
+const { Campus } = db.models;
 
 app.get('/', (req, res, next) => {
-  Campus.findAll()
+  Campus.findAll({ include: [ db.models.Student ] })
     .then(campuses => res.send(campuses))
     .catch(next)
 });
 
 app.get('/:id', (req, res, next) => {
-  Campus.findById(req.params.id)
+  Campus.findById(req.params.id, { include: [ db.models.Student ] })
     .then(campus => res.send(campus))
     .catch(next)
 });
