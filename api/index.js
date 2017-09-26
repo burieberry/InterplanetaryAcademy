@@ -17,7 +17,7 @@ app.get('/campuses/:id', (req, res, next) => {
 });
 
 app.get('/students', (req, res, next) => {
-  Student.findAll()
+  Student.findAll({ include: [ Campus ] })
     .then(students => res.send(students))
     .catch(next)
 });
