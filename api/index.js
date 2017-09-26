@@ -71,5 +71,11 @@ app.delete('/campuses/:id', (req, res, next) => {
     .catch(next)
 });
 
+app.delete('/students/:id', (req, res, next) => {
+  Student.destroy({ where: { id: req.params.id }})
+    .then(() => res.sendStatus(204))
+    .catch(next)
+});
+
 
 module.exports = app;

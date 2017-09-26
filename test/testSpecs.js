@@ -161,3 +161,28 @@ describe('DELETE /api/campuses/:id', () => {
       })
   });
 });
+
+describe('DELETE /api/students/:id', () => {
+  it('returns 204', () => {
+    const student = { id: 10 };
+    return app.delete(`/api/students/${student.id}`)
+      .expect(204)
+  });
+
+  it('deletes student', () => {
+    const student = { id: 999,  name: 'Zero' };
+    return app.post('/api/students')
+      .send(student)
+      .then((res) => {
+        expect(res.body.name).to.equal(student.name);
+        return app.delete(`/api/students/${student.id}`)
+      })
+      .then(() => {
+        return app.get('/api/students');
+      })
+      .then(students => {
+        expect(students.text).to.contain('Eren');
+        expect(students.text).not.to.contain(student.name);
+      })
+  });
+});
