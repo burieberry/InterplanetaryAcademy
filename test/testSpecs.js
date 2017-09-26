@@ -81,3 +81,58 @@ describe('POST /api/students', () => {
       })
   });
 });
+
+describe('PUT /api/campuses/:id', () => {
+  it('can update campus name', () => {
+    const campus = { id: 6, name: 'Campus V3' };
+    return app.put(`/api/campuses/${campus.id}`)
+      .send(campus)
+      .expect(200)
+      .then(res => {
+        expect(res.body.name).to.equal(campus.name);
+      })
+  });
+});
+
+describe('PUT /api/students/:id', () => {
+  it('can update student name', () => {
+    const student = { id: 6, name: 'Commander' };
+    return app.put(`/api/students/${student.id}`)
+      .send(student)
+      .expect(200)
+      .then(res => {
+        expect(res.body.name).to.equal(student.name);
+      })
+  });
+
+  it('can update student email', () => {
+    const student = { id: 7, email: 'sasha@mh.com' };
+    return app.put(`/api/students/${student.id}`)
+      .send(student)
+      .expect(200)
+      .then(res => {
+        expect(res.body.email).to.equal(student.email);
+      })
+  });
+
+  it('can update student name and email', () => {
+    const student = { id: 8, name: 'Zate', email: 'zate@mh.com' };
+    return app.put(`/api/students/${student.id}`)
+      .send(student)
+      .expect(200)
+      .then(res => {
+        expect(res.body.name).to.equal(student.name);
+        expect(res.body.email).to.equal(student.email);
+      })
+  });
+
+  it('can update student campus id', () => {
+    const student = { id: 9, name: 'Guillome', email: 'guillome@mh.com', campusId: 4 };
+    return app.put(`/api/students/${student.id}`)
+      .send(student)
+      .expect(200)
+      .then(res => {
+        expect(res.body.campusId).to.equal(student.campusId);
+      })
+  });
+})

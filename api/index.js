@@ -3,6 +3,7 @@ const app = require('express').Router();
 const db = require('../db');
 const { Student, Campus } = db.models;
 
+// GET
 app.get('/campuses', (req, res, next) => {
   Campus.findAll()
     .then(campuses => res.send(campuses))
@@ -27,6 +28,7 @@ app.get('/students/:id', (req, res, next) => {
     .catch(next)
 });
 
+// CREATE
 app.post('/campuses', (req, res, next) => {
   Campus.create(req.body)
     .then(campus => res.status(201).send(campus))
@@ -38,5 +40,29 @@ app.post('/students', (req, res, next) => {
     .then(student => res.status(201).send(student))
     .catch(next)
 });
+
+// UPDATE
+app.put('/campuses/:id', (req, res, next) => {
+  Campus.findById(req.params.id)
+    .then(campus => {
+      campus.name = req.body.name;
+      return campus.save();
+    })
+    .then(campus => res.send(campus))
+    .catch(next)
+});
+
+app.put('/students/:id', (req, res, next) => {
+  Student.findById(req.params.id)
+    .then(student => {
+      req.body.name && student.name !== req.body.name ? student.name = req.body.name : student.name;
+      req.body.email && student.email !== req.body.email ? student.email = req.body.email : student.email;
+      req.body.campusId && student.campusId !== req.body.campusId ? student.campusId = req.body.campusId : student.campusId;
+      return student.save();
+    })
+    .then(student => res.send(student))
+    .catch(next)
+});
+
 
 module.exports = app;
