@@ -10,4 +10,12 @@ const Campus = conn.define('campus', {
   }
 });
 
+Campus.updateCampusInfo = function(id, data) {
+  return Campus.findById(id)
+    .then(campus => {
+      campus.name = data.name;
+      return campus.save();
+    })
+};
+
 module.exports = Campus;

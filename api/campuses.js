@@ -21,11 +21,7 @@ app.post('/', (req, res, next) => {
 });
 
 app.put('/:id', (req, res, next) => {
-  Campus.findById(req.params.id)
-    .then(campus => {
-      campus.name = req.body.name;
-      return campus.save();
-    })
+  Campus.updateCampusInfo(req.params.id, req.body)
     .then(campus => res.send(campus))
     .catch(next)
 });
