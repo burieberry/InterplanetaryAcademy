@@ -22,8 +22,7 @@ app.post('/', (req, res, next) => {
 });
 
 app.put('/:id', (req, res, next) => {
-  Student.findById(req.params.id)
-    .then(student => student.updateStudentInfo(student, req.body))
+  Student.updateStudentInfo(req.params.id, req.body)
     .then(student => res.send(student))
     .catch(next)
 });
