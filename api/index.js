@@ -55,9 +55,9 @@ app.put('/campuses/:id', (req, res, next) => {
 app.put('/students/:id', (req, res, next) => {
   Student.findById(req.params.id)
     .then(student => {
-      req.body.name && student.name !== req.body.name ? student.name = req.body.name : student.name;
-      req.body.email && student.email !== req.body.email ? student.email = req.body.email : student.email;
-      req.body.campusId && student.campusId !== req.body.campusId ? student.campusId = req.body.campusId : student.campusId;
+      if (student.name !== req.body.name) student.name = req.body.name;
+      if (student.email !== req.body.email) student.email = req.body.email;
+      if (student.campusId !== req.body.campusId) student.campusId = req.body.campusId;
       return student.save();
     })
     .then(student => res.send(student))
@@ -76,6 +76,5 @@ app.delete('/students/:id', (req, res, next) => {
     .then(() => res.sendStatus(204))
     .catch(next)
 });
-
 
 module.exports = app;
