@@ -1,23 +1,7 @@
 'use strict';
 const conn = require('./conn');
-
-const Student = conn.define('student', {
-  name: {
-    type: conn.Sequelize.STRING
-  },
-  email: {
-    type: conn.Sequelize.STRING
-  }
-});
-
-const Campus = conn.define('campus', {
-  name: {
-    type: conn.Sequelize.STRING
-  },
-  image: {
-    type: conn.Sequelize.STRING
-  }
-});
+const Student = require('./Student'),
+      Campus = require('./Campus');
 
 // Associations
 Campus.hasMany(Student);
