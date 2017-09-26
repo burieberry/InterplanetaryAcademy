@@ -13,7 +13,7 @@ const Student = conn.define('student', {
 Student.updateStudentInfo = (id, data) => {
   return Student.findById(id)
     .then(student => {
-      student.attributes.map((attr) => {
+      student.attributes.map(attr => {
         student[attr] = data[attr];
       })
       return student.save();
