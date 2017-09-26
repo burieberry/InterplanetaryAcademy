@@ -64,5 +64,12 @@ app.put('/students/:id', (req, res, next) => {
     .catch(next)
 });
 
+// DELETE
+app.delete('/campuses/:id', (req, res, next) => {
+  Campus.destroy({ where: { id: req.params.id }})
+    .then(() => res.sendStatus(204))
+    .catch(next)
+});
+
 
 module.exports = app;

@@ -136,3 +136,28 @@ describe('PUT /api/students/:id', () => {
       })
   });
 })
+
+describe('DELETE /api/campuses/:id', () => {
+  it('returns 204', () => {
+    const campus = { id: 12 };
+    return app.delete(`/api/campuses/${campus.id}`)
+      .expect(204)
+  });
+
+  it('deletes campus', () => {
+    const campus = { id: 999,  name: 'Campus Very New' };
+    return app.post('/api/campuses')
+      .send(campus)
+      .then((res) => {
+        expect(res.body.name).to.equal(campus.name);
+        return app.delete(`/api/campuses/${campus.id}`)
+      })
+      .then(() => {
+        return app.get('/api/campuses');
+      })
+      .then(campuses => {
+        expect(campuses.text).to.contain('Campus 2');
+        expect(campuses.text).not.to.contain(campus.name);
+      })
+  });
+});
