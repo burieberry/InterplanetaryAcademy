@@ -13,9 +13,9 @@ const Student = conn.define('student', {
 Student.updateStudentInfo = (id, data) => {
   return Student.findById(id)
     .then(student => {
-      if (student.name !== data.name) student.name = data.name;
-      if (student.email !== data.email) student.email = data.email;
-      if (student.campusId !== data.campusId) student.campusId = data.campusId;
+      student.attributes.map((attr) => {
+        student[attr] = data[attr];
+      })
       return student.save();
     })
 };
