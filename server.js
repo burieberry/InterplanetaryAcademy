@@ -1,10 +1,11 @@
 'use strict';
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const app = express();
 
-app.use(require('body-parser').urlencoded({ extended: false }));
-// app.use(require('body-parser').json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/api', require('./api'));

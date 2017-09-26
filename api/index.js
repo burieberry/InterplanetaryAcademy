@@ -27,4 +27,16 @@ app.get('/students/:id', (req, res, next) => {
     .catch(next)
 });
 
+app.post('/campuses', (req, res, next) => {
+  Campus.create(req.body)
+    .then(campus => res.status(201).send(campus))
+    .catch(next)
+});
+
+app.post('/students', (req, res, next) => {
+  Student.create(req.body)
+    .then(student => res.status(201).send(student))
+    .catch(next)
+});
+
 module.exports = app;

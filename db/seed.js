@@ -1,6 +1,6 @@
 'use strict';
-const db = require('./');
-const { Student, Campus } = require('./').models;
+const db = require('../db');
+const { Student, Campus } = db.models;
 
 const seed = () => {
   return Promise.all([
@@ -20,13 +20,11 @@ const seed = () => {
     c2.addStudent(armin);
     c3.addStudent(erwin);
   })
-  .catch(err => console.log(err));
 };
 
 const sync = () => {
   db.sync({ force: true })
     .then(seed)
-    .catch(err => console.log(err))
 };
 
 sync();
