@@ -54,12 +54,7 @@ app.put('/campuses/:id', (req, res, next) => {
 
 app.put('/students/:id', (req, res, next) => {
   Student.findById(req.params.id)
-    .then(student => {
-      if (student.name !== req.body.name) student.name = req.body.name;
-      if (student.email !== req.body.email) student.email = req.body.email;
-      if (student.campusId !== req.body.campusId) student.campusId = req.body.campusId;
-      return student.save();
-    })
+    .then(student => student.updateStudentInfo(student, req.body))
     .then(student => res.send(student))
     .catch(next)
 });
