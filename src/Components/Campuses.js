@@ -8,13 +8,13 @@ const Campuses = ({ campuses }) => {
         {
           campuses.map(campus => {
             return (
-              <li key={ campus.id } className="col-xs-6">
+              <li key={ campus.id } className="col-xs-4">
                 <section className="panel panel-default">
-                  <div className="panel-heading">
-                    <h3>{ campus.name }</h3>
-                  </div>
+                  <h4 className="panel-heading" style={{ marginTop: '0' }}>
+                    { campus.name }
+                  </h4>
                   <div className="panel-body">
-                    <img src={ campus.image } width="400" height="250" />
+                    <img src={ campus.image } width="100%" />
                   </div>
                 </section>
               </li>
