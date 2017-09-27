@@ -2,12 +2,14 @@ import React from 'react';
 
 const Students = ({ students, campuses }) => {
   return (
-    <section className="col-xs-10">
+    <section className="col-xs-8">
+      <h2 style={{ paddingBottom: '18px' }}>Students</h2>
       <table className="table">
         <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
+            <th>Email</th>
             <th>Campus</th>
           </tr>
         </thead>
@@ -16,6 +18,7 @@ const Students = ({ students, campuses }) => {
           students.map(student => {
             return (
               <tr key={ student.id }>
+                <td>{ student.id }</td>
                 <td><strong>{ student.name }</strong></td>
                 <td><a href={`mailTo:${ student.email }`}>{ student.email }</a></td>
                 <td>
