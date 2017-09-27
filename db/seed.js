@@ -10,11 +10,11 @@ const seed = () => {
     Student.create({ name: 'Annie', email: 'annie@mhacademy.com' }),
     Student.create({ name: 'Erwin', email: 'erwin@mhacademy.com' }),
     Campus.create({ name: 'Earth', image: 'https://placeimg.com/400/250/arch' }),
-    Campus.create({ name: 'Moon', image: 'https://placeimg.com/400/250/arch' }),
+    Campus.create({ name: 'Saturn', image: 'https://placeimg.com/400/250/arch' }),
     Campus.create({ name: 'Mars', image: 'https://placeimg.com/400/250/arch' }),
-    Campus.create({ name: 'Pluto', image: 'https://placeimg.com/400/250/arch' }),
+    Campus.create({ name: 'Venus', image: 'https://placeimg.com/400/250/arch' }),
     Campus.create({ name: 'Jupiter', image: 'https://placeimg.com/400/250/arch' }),
-    Campus.create({ name: 'Venus', image: 'https://placeimg.com/400/250/arch' })
+    Campus.create({ name: 'Pluto', image: 'https://placeimg.com/400/250/arch' })
   ])
   .then(([ s1, s2, s3, s4, s5, c1, c2, c3, c4 ]) => {
     c1.addStudent(s1);
