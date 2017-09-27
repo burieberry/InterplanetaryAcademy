@@ -2,11 +2,15 @@
   "name": "senior-enrichment-project",
   "version": "1.0.0",
   "description": "A review time project.",
+  "engines": {
+    "node": "8.4.0"
+  },
   "main": "server.js",
   "scripts": {
-    "postinstall": "npm run webpack",
+    "postinstall": "npm run webpack && npm run seed",
     "webpack": "./node_modules/webpack/bin/webpack.js",
     "test": "nodemon ./node_modules/mocha/bin/mocha",
+    "start": "noe server.js",
     "start:dev": "npm run webpack -- -w & nodemon --ignore src/ --ignore dist/ server.js",
     "seed": "node ./db/seed.js"
   },
@@ -14,7 +18,7 @@
     "react",
     "redux"
   ],
-  "author": "",
+  "author": "Burcu Noyan",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
