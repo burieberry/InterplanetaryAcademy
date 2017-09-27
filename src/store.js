@@ -7,17 +7,26 @@ import thunk from 'redux-thunk';
 
 // INITIAL STATE
 const initialState = {
-  campuses: []
+  campuses: [],
+  students: []
 };
 
 // ACTION TYPE
 const GET_CAMPUSES = 'GET_CAMPUSES';
+const GET_STUDENTS = 'GET_STUDENTS';
 
 // ACTION CREATOR
-export const getCampuses = (campuses) => {
+const getCampuses = (campuses) => {
   return {
     type: GET_CAMPUSES,
     campuses
+  }
+};
+
+const getStudents = (students) => {
+  return {
+    type: GET_STUDENTS,
+    students
   }
 };
 
@@ -28,13 +37,24 @@ export const fetchCampuses = () => {
       .then(res => res.data)
       .then(campuses => dispatch(getCampuses(campuses)));
   }
-}
+};
+
+export const fetchStudents = () => {
+  return function thunk(dispatch) {
+    return axios.get('api/students')
+      .then(res => res.data)
+      .then(students => dispatch(getStudents(students)));
+  }
+};
 
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch(action.type) {
     case GET_CAMPUSES:
       return Object.assign({}, state, { campuses: action.campuses });
+
+    case GET_STUDENTS:
+      return Object.assign({}, state, { students: action.students });
 
     default:
       return state;
