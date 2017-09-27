@@ -7,7 +7,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "postinstall": "npm run webpack && npm run seed",
+    "postinstall": "npm run webpack",
     "webpack": "./node_modules/webpack/bin/webpack.js",
     "test": "nodemon ./node_modules/mocha/bin/mocha",
     "start": "noe server.js",
