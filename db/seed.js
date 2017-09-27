@@ -9,10 +9,10 @@ const seed = () => {
     Student.create({ name: 'Armin', email: 'armin@mh.com' }),
     Student.create({ name: 'Annie', email: 'annie@mh.com' }),
     Student.create({ name: 'Erwin', email: 'erwin@mh.com' }),
-    Campus.create({ name: 'Campus 1' }),
-    Campus.create({ name: 'Campus 2' }),
-    Campus.create({ name: 'Campus 3' }),
-    Campus.create({ name: 'Campus 4' })
+    Campus.create({ name: 'Campus 1', image: 'https://placekitten.com/g/400/300' }),
+    Campus.create({ name: 'Campus 2', image: 'https://placekitten.com/g/400/300' }),
+    Campus.create({ name: 'Campus 3', image: 'https://placekitten.com/g/400/300' }),
+    Campus.create({ name: 'Campus 4', image: 'https://placekitten.com/g/400/300' })
   ])
   .then(([ eren, mikasa, armin, annie, erwin, c1, c2, c3 ]) => {
     c1.addStudent(eren);
