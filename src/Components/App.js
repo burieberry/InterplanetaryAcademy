@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import Nav from './Nav';
+import store, { fetchCampuses, fetchStudents } from '../store';
 import Campuses from './Campuses';
+import Students from './Students';
 
-const App = () => {
-  return (
-    <main className="container">
-      <h1 className="col-xs-12" style={{ fontSize: '34px', paddingBottom: '18px' }}>Margaret Hamilton Interplanetary Academy of JavaScript</h1>
-      <Nav />
-      <Campuses />
-    </main>
-  );
-};
+class App extends Component {
+  constructor() {
+    super();
+    this.state = store.getState();
+  }
+
+  componentDidMount() {
+    store.dispatch(fetchCampuses());
+    store.dispatch(fetchStudents());
+    this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const { campuses, students } = this.state;
+
+    return (
+      <main className="container">
+        <h1 className="col-xs-12" style={{ fontSize: '34px', paddingBottom: '18px' }}>Margaret Hamilton Interplanetary Academy of JavaScript</h1>
+        <Nav />
+        <Route exact path="/" render={() => <Campuses campuses={ campuses } /> } />
+        <Route exact path="/campuses" render={() => <Campuses campuses={ campuses } /> } />
+        <Route exact path="/students" render={() => <Students students={ students } campuses={ campuses } /> } />
+      </main>
+    );
+  }
+}
 
 export default App;
