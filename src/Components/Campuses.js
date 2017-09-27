@@ -22,7 +22,22 @@ class Campuses extends Component {
 
     return (
       <section className="row">
-        <div className="col-xs-12">Campus</div>
+        <ul className="col-xs-12 list-unstyled">
+
+          {
+            campuses.map(campus => {
+              return (
+                <li key={ campus.id } className="col-xs-4">
+                  <div className="panel panel-default">
+                    <div className="panel-body">
+                      { campus.name }
+                    </div>
+                  </div>
+                </li>
+              )
+            })
+          }
+        </ul>
       </section>
     );
   }
