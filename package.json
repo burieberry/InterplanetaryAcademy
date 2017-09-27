@@ -2,17 +2,13 @@
   "name": "senior-enrichment-project",
   "version": "1.0.0",
   "description": "A review time project.",
-  "engines": {
-    "node": "8.4.0"
-  },
   "main": "server.js",
   "scripts": {
     "postinstall": "npm run webpack",
     "webpack": "./node_modules/webpack/bin/webpack.js",
-    "test": "nodemon ./node_modules/mocha/bin/mocha",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "start:dev": "npm run webpack -- -w & nodemon --ignore src/ --ignore dist/ server.js",
-    "seed": "node ./db/seed.js"
+    "start:dev": "npm run webpack -- -w & nodemon --ignore src/ --ignore dist/ server.js"
   },
   "keywords": [
     "react",
@@ -25,6 +21,7 @@
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "express": "^4.15.4",
+    "path": "^0.12.7",
     "pg": "^7.3.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
