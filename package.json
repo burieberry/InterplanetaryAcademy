@@ -10,7 +10,7 @@
     "postinstall": "npm run webpack",
     "webpack": "./node_modules/webpack/bin/webpack.js",
     "test": "nodemon ./node_modules/mocha/bin/mocha",
-    "start": "noe server.js",
+    "start": "node server.js",
     "start:dev": "npm run webpack -- -w & nodemon --ignore src/ --ignore dist/ server.js",
     "seed": "node ./db/seed.js"
   },
