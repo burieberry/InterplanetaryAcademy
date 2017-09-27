@@ -5,7 +5,7 @@ const Nav = () => {
   return (
     <nav className="col-xs-12" style={{ paddingBottom: '18px' }}>
       <ul className="nav nav-tabs">
-        <li className="active"><a href="#">Campuses</a></li>
+        <li className="active"><a href="/">Campuses</a></li>
         <li><a href="#">Students</a></li>
       </ul>
     </nav>
