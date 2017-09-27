@@ -32,7 +32,7 @@ class Campuses extends Component {
                       <h3>{ campus.name }</h3>
                     </div>
                     <div className="panel-body">
-                      <img src={ campus.image } width="300" />
+                      <img src={ campus.image } width="400" height="250" />
                     </div>
                   </section>
                 </li>
