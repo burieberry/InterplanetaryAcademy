@@ -2,16 +2,16 @@
 const app = require('express').Router();
 const db = require('../db');
 const { Student } = db.models;
-const options = { include: [ db.models.Campus ] };
+// const options = { include: [ db.models.Campus ] };
 
 app.get('/', (req, res, next) => {
-  Student.findAll(options)
+  Student.findAll()
     .then(students => res.send(students))
     .catch(next)
 });
 
 app.get('/:id', (req, res, next) => {
-  Student.findById(req.params.id, options)
+  Student.findById(req.params.id)
     .then(student => res.send(student))
     .catch(next)
 });
