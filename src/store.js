@@ -1,21 +1,27 @@
 'use strict';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import axios from 'axios';
+import thunk from 'redux-thunk';
 
-
+// INITIAL STATE
 const initialState = {
   campuses: []
 };
 
+// ACTION TYPE
 const GET_CAMPUSES = 'GET_CAMPUSES';
 
-const getCampuses = (campuses) => {
+// ACTION CREATOR
+export const getCampuses = (campuses) => {
   return {
     type: GET_CAMPUSES,
     campuses
   }
 };
 
+// THUNK CREATOR
 export const fetchCampuses = () => {
   return function thunk(dispatch) {
     return axios.get('/api/campuses')
@@ -24,16 +30,17 @@ export const fetchCampuses = () => {
   }
 }
 
+// REDUCER
 const reducer = (state = initialState, action) => {
   switch(action.type) {
     case GET_CAMPUSES:
-      return action.campuses
+      return Object.assign({}, state, { campuses: action.campuses });
 
     default:
       return state;
   }
 };
 
-const store = createStore(reducer);
-
+// STORE
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk, logger)));
 export default store;
