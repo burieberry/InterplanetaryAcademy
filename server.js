@@ -14,9 +14,13 @@ app.use('/api', require('./api'));
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')));
 
 const port = process.env.PORT || 3000;
+const db = require('./db');
 
 app.listen(port, () => {
-  console.log(`Listening on port ${ port }.`);
+  db.sync()
+    .then(db.seed)
+    .then(console.log('Database synced and seeded.'))
+    .then(console.log(`Listening on port ${ port }.`))
 });
 
 module.exports = app;
