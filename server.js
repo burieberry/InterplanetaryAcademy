@@ -13,6 +13,10 @@ app.use('/api', require('./api'));
 
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')));
 
+app.use((err, req, res, next) => {
+  res.status(err.status || 500).send(err.message || 'Something broke.');
+});
+
 const port = process.env.PORT || 3000;
 const db = require('./db');
 
