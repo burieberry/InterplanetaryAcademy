@@ -14,6 +14,7 @@ const initialState = {
 // ACTION TYPE
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_STUDENTS = 'GET_STUDENTS';
+const ADD_STUDENT = 'ADD_STUDENT';
 
 // ACTION CREATOR
 const getCampuses = (campuses) => {
@@ -27,6 +28,13 @@ const getStudents = (students) => {
   return {
     type: GET_STUDENTS,
     students
+  }
+};
+
+const addStudent = (student) => {
+  return {
+    type: ADD_STUDENT,
+    student
   }
 };
 
@@ -47,6 +55,14 @@ export const fetchStudents = () => {
   }
 };
 
+export const addStudentThunk = (student) => {
+  return dispatch => {
+    return axios.post('/api/students', student)
+      .then(res => res.data)
+      .then(newStudent => dispatch(addStudent(newStudent)))
+  }
+}
+
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -55,6 +71,9 @@ const reducer = (state = initialState, action) => {
 
     case GET_STUDENTS:
       return Object.assign({}, state, { students: action.students });
+
+    case ADD_STUDENT:
+      return Object.assign({}, state, { students: [ ...state.students, action.student ] })
 
     default:
       return state;
