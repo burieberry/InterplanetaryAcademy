@@ -4,6 +4,7 @@ import Nav from './Nav';
 import store, { fetchCampuses, fetchStudents } from '../store';
 import Campuses from './Campuses';
 import Students from './Students';
+import StudentForm from './StudentForm';
 
 class App extends Component {
   constructor() {
@@ -31,6 +32,7 @@ class App extends Component {
         <Route exact path="/" render={() => <Campuses campuses={ campuses } />} />
         <Route exact path="/campuses" render={() => <Campuses campuses={ campuses } /> } />
         <Route exact path="/students" render={() => <Students students={ students } campuses={ campuses } /> } />
+        <Route exact path="/students/add" render={ () => <StudentForm campuses={ campuses } /> } />
       </main>
     );
   }
