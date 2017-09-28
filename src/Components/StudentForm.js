@@ -22,20 +22,18 @@ class StudentForm extends Component {
   }
 
   onChange(ev) {
-    const target = ev.target;
-    const value = target.value;
-    const name = target.name;
+    const name = ev.target.name;
 
     this.setState({
-      [name]: value
+      [name]: ev.target.value
     });
   }
 
   onSubmit(ev) {
     ev.preventDefault();
     const { selectedName, selectedCampus, campuses } = this.state;
-    const campus = campuses.filter(camp => { return camp.name === selectedCampus })[0];
-    store.dispatch(addStudentThunk({ name: selectedName, campusId: campus.id }));
+    const campus = campuses.filter(camp => { return camp.name === selectedCampus });
+    store.dispatch(addStudentThunk({ name: selectedName, campusId: campus[0].id }));
   }
 
   render() {
