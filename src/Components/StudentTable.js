@@ -19,7 +19,7 @@ class StudentTable extends Component {
     const { students, campuses } = this.state;
 
     return (
-      <div className="col-xs-8">
+      <section className="col-xs-8">
         <button className="btn btn-primary pull-right">+</button>
         <table className="table">
           <thead>
@@ -59,7 +59,7 @@ class StudentTable extends Component {
           }
           </tbody>
         </table>
-      </div>
+      </section>
     )
   }
 }

@@ -5,8 +5,8 @@ import StudentTable from './StudentTable';
 const Students = (props) => {
   return (
     <section className="col-xs-12">
+      <h2>Students</h2>
       <div className="row">
-        <h2>Students</h2>
         <StudentTable { ...props } />
         <StudentForm { ...props } />
       </div>

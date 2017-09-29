@@ -4,7 +4,7 @@ import React from 'react';
 const Campuses = ({ campuses }) => {
   return (
     <section className="col-xs-10">
-      <h2 style={{ paddingBottom: '18px' }}>Campuses</h2>
+      <h2 style={{ marginBottom: '1.5em' }}>Campuses</h2>
       <ul className="list-unstyled">
         {
           campuses.map(campus => {
