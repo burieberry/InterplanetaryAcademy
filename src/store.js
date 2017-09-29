@@ -11,7 +11,7 @@ const initialState = {
   students: [],
   form: false,
   campus: 'Earth',
-  student: {}
+  input: {}
 };
 
 // ACTION TYPE
@@ -21,8 +21,6 @@ const ADD_STUDENT = 'ADD_STUDENT';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const SHOW_FORM = 'SHOW_FORM';
 const EDIT_FORM = 'EDIT_FORM';
-const SUBMIT_FORM = 'SUBMIT_FORM';
-const EDIT_CAMPUS = 'EDIT_CAMPUS';
 
 // ACTION CREATOR
 const getCampuses = (campuses) => {
@@ -58,24 +56,10 @@ export const showForm = () => {
   }
 }
 
-export const editForm = (student) => {
+export const editForm = (input) => {
   return {
     type: EDIT_FORM,
-    student
-  }
-}
-
-export const submitForm = (campus) => {
-  return {
-    type: SUBMIT_FORM,
-    campus
-  }
-}
-
-export const editCampus = (campus) => {
-  return {
-    type: SUBMIT_FORM,
-    campus
+    input
   }
 }
 
@@ -101,14 +85,6 @@ export const addStudentThunk = (student) => {
     return axios.post('/api/students', student)
       .then(res => res.data)
       .then(newStudent => dispatch(addStudent(newStudent)))
-  }
-}
-
-export const getCampusThunk = campusName => {
-  return dispatch => {
-    return axios.get(`/api/campuses/${campusName}`)
-      .then(res => res.data)
-      .then(campus => dispatch(submitForm(campus)))
   }
 }
 
@@ -140,13 +116,7 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { form: true });
 
     case EDIT_FORM:
-      return Object.assign({}, state, { student: action.student });
-
-    case SUBMIT_FORM:
-      return Object.assign({}, state, { campus: action.campus });
-
-    case EDIT_CAMPUS:
-      return Object.assign({}, state, { campus: action.campus });
+      return Object.assign({}, state, { input: action.input });
 
     default:
       return state;
