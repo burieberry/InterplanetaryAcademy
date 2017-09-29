@@ -7,6 +7,7 @@ class StudentTable extends Component {
     this.state = store.getState();
     this.onDelete = this.onDelete.bind(this);
     this.showForm = this.showForm.bind(this);
+    this.getCampus = this.getCampus.bind(this);
   }
 
   componentDidMount () {
@@ -25,13 +26,17 @@ class StudentTable extends Component {
     store.dispatch(showForm(form));
   }
 
+  getCampus(id) {
+    const { campuses } = this.state;
+    return campuses.filter(campus => campus.id === id).length ? campuses.filter(campus => campus.id === id)[0].name : '-';
+  }
+
   render() {
     const { students, campuses, form } = this.state;
-    const { onDelete, showForm } = this;
+    const { onDelete, showForm, getCampus } = this;
 
     return (
       <section className="col-xs-8">
-        <button onClick={ () => showForm(form) } className="btn btn-info pull-right" style={{ marginLeft: '10px' }}>Edit</button>
         <button onClick={ () => showForm(form) } className="btn btn-primary pull-right">+</button>
         <table className="table">
           <thead>
@@ -49,13 +54,7 @@ class StudentTable extends Component {
                 <tr key={ student.id } name="student" value={ student }>
                   <td>{ student.id }</td>
                   <td>{ student.name }</td>
-                  <td>
-                    {
-                      campuses.filter(campus => campus.id === student.campusId).length ?
-                      campuses.filter(campus => campus.id === student.campusId)[0].name
-                      : '-'
-                    }
-                  </td>
+                  <td>{ getCampus(student.campusId) }</td>
                   <td>
                     <button onClick={ () => onDelete(student) } type="submit" className="btn btn-xs btn-danger">Delete</button>
                   </td>
