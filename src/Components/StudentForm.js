@@ -1,44 +1,10 @@
 import React, { Component } from 'react';
-import store, { addStudentThunk } from '../store';
+import { connect } from 'react-redux';
+import { addStudentThunk, editForm, submitForm, editCampus, getCampusThunk } from '../store';
 
 class StudentForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      selectedName: '',
-      selectedCampus: 'Earth'
-    };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  componentDidMount () {
-    this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
-  }
-
-  componentWillUnmount () {
-    this.unsubscribe();
-  }
-
-  onChange(ev) {
-    const name = ev.target.name;
-
-    this.setState({
-      [name]: ev.target.value
-    });
-  }
-
-  onSubmit(ev) {
-    ev.preventDefault();
-    const { selectedName, selectedCampus, campuses } = this.state;
-    const campus = campuses.filter(camp => { return camp.name === selectedCampus });
-    store.dispatch(addStudentThunk({ name: selectedName, campusId: campus[0].id }));
-  }
-
   render() {
-    const { selectedName, selectedCampus } = this.state;
-    const { campuses, form } = this.props;
-    const { onChange, onSubmit } = this;
+    const { campuses, form, onChange, onSubmit } = this.props;
 
     return (
       <section className="col-xs-4">
@@ -51,18 +17,18 @@ class StudentForm extends Component {
                 <div className="form-group row">
                   <label className="col-xs-3 col-form-label">Name: </label>
                   <div className="col-xs-8">
-                    <input value={ selectedName } name="selectedName" type="text" onChange={ onChange } className="form-control" />
+                    <input name="studentName" type="text" onChange={ onChange } className="form-control" />
                   </div>
                 </div>
 
                 <div className="form-group row">
                   <label className="col-xs-3 col-form-label">Select Campus: </label>
                   <div className="col-xs-8">
-                    <select value={ selectedCampus } name="selectedCampus" onChange={ onChange } className="form-control">
+                    <select name="campus" onChange={ onChange } className="form-control">
                       {
                         campuses.map(campus => {
                           return (
-                            <option key={ campus.id }>{ campus.name }</option>
+                            <option value={ campus.id } key={ campus.id }>{ campus.name }</option>
                           );
                         })
                       }
@@ -78,6 +44,33 @@ class StudentForm extends Component {
       </section>
     );
   }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    campuses: state.campuses
+  }
 };
 
-export default StudentForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onChange(ev) {
+      const name = ev.target.name;
+
+      if (ev.target.type === 'text') {
+        dispatch(editForm({ [name]: ev.target.value}));
+      }
+      else {
+        dispatch(editCampus(ev.target.value));
+      }
+    },
+    onSubmit(ev) {
+      ev.preventDefault();
+      const name = ev.target.studentName.value;
+      const campusId = ev.target.campus.value;
+      dispatch(addStudentThunk({ name, campusId }))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentForm);

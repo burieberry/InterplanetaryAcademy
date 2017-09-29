@@ -9,7 +9,9 @@ import thunk from 'redux-thunk';
 const initialState = {
   campuses: [],
   students: [],
-  form: false
+  form: false,
+  campus: 'Earth',
+  student: {}
 };
 
 // ACTION TYPE
@@ -18,6 +20,9 @@ const GET_STUDENTS = 'GET_STUDENTS';
 const ADD_STUDENT = 'ADD_STUDENT';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const SHOW_FORM = 'SHOW_FORM';
+const EDIT_FORM = 'EDIT_FORM';
+const SUBMIT_FORM = 'SUBMIT_FORM';
+const EDIT_CAMPUS = 'EDIT_CAMPUS';
 
 // ACTION CREATOR
 const getCampuses = (campuses) => {
@@ -47,16 +52,36 @@ const removeStudent = () => {
   }
 };
 
-export const showForm = (form) => {
+export const showForm = () => {
   return {
-    type: SHOW_FORM,
-    form
+    type: SHOW_FORM
+  }
+}
+
+export const editForm = (student) => {
+  return {
+    type: EDIT_FORM,
+    student
+  }
+}
+
+export const submitForm = (campus) => {
+  return {
+    type: SUBMIT_FORM,
+    campus
+  }
+}
+
+export const editCampus = (campus) => {
+  return {
+    type: SUBMIT_FORM,
+    campus
   }
 }
 
 // THUNK CREATOR
 export const fetchCampuses = () => {
-  return function thunk(dispatch) {
+  return dispatch => {
     return axios.get('/api/campuses')
       .then(res => res.data)
       .then(campuses => dispatch(getCampuses(campuses)));
@@ -64,7 +89,7 @@ export const fetchCampuses = () => {
 };
 
 export const fetchStudents = () => {
-  return function thunk(dispatch) {
+  return dispatch => {
     return axios.get('api/students')
       .then(res => res.data)
       .then(students => dispatch(getStudents(students)));
@@ -76,6 +101,14 @@ export const addStudentThunk = (student) => {
     return axios.post('/api/students', student)
       .then(res => res.data)
       .then(newStudent => dispatch(addStudent(newStudent)))
+  }
+}
+
+export const getCampusThunk = campusName => {
+  return dispatch => {
+    return axios.get(`/api/campuses/${campusName}`)
+      .then(res => res.data)
+      .then(campus => dispatch(submitForm(campus)))
   }
 }
 
@@ -105,6 +138,15 @@ const reducer = (state = initialState, action) => {
 
     case SHOW_FORM:
       return Object.assign({}, state, { form: true });
+
+    case EDIT_FORM:
+      return Object.assign({}, state, { student: action.student });
+
+    case SUBMIT_FORM:
+      return Object.assign({}, state, { campus: action.campus });
+
+    case EDIT_CAMPUS:
+      return Object.assign({}, state, { campus: action.campus });
 
     default:
       return state;

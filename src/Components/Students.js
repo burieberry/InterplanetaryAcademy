@@ -4,7 +4,6 @@ import StudentForm from './StudentForm';
 import StudentTable from './StudentTable';
 
 const Students = (props) => {
-  console.log(props)
   return (
     <section className="col-xs-12">
       <h2>Students</h2>
