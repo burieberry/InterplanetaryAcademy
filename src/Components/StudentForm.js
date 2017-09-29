@@ -37,40 +37,44 @@ class StudentForm extends Component {
 
   render() {
     const { selectedName, selectedCampus } = this.state;
-    const { campuses } = this.props;
+    const { campuses, form } = this.props;
     const { onChange, onSubmit } = this;
 
     return (
       <section className="col-xs-4">
-        <div className="panel panel-default">
-          <h3 className="panel-heading" style={{ margin: 0 }} >Add Student</h3>
+        {
+          form && (
+            <div className="panel panel-default">
+              <h3 className="panel-heading" style={{ margin: 0 }} >Add Student</h3>
 
-          <form onSubmit={ onSubmit } className="panel-body">
-            <div className="form-group row">
-              <label className="col-xs-3 col-form-label">Name: </label>
-              <div className="col-xs-8">
-                <input value={ selectedName } name="selectedName" type="text" onChange={ onChange } className="form-control" />
-              </div>
+              <form onSubmit={ onSubmit } className="panel-body">
+                <div className="form-group row">
+                  <label className="col-xs-3 col-form-label">Name: </label>
+                  <div className="col-xs-8">
+                    <input value={ selectedName } name="selectedName" type="text" onChange={ onChange } className="form-control" />
+                  </div>
+                </div>
+
+                <div className="form-group row">
+                  <label className="col-xs-3 col-form-label">Select Campus: </label>
+                  <div className="col-xs-8">
+                    <select value={ selectedCampus } name="selectedCampus" onChange={ onChange } className="form-control">
+                      {
+                        campuses.map(campus => {
+                          return (
+                            <option key={ campus.id }>{ campus.name }</option>
+                          );
+                        })
+                      }
+                    </select>
+                  </div>
+                </div>
+
+                <button type="submit" className="btn btn-primary">Submit</button>
+              </form>
             </div>
-
-            <div className="form-group row">
-              <label className="col-xs-3 col-form-label">Select Campus: </label>
-              <div className="col-xs-8">
-                <select value={ selectedCampus } name="selectedCampus" onChange={ onChange } className="form-control">
-                  {
-                    campuses.map(campus => {
-                      return (
-                        <option key={ campus.id }>{ campus.name }</option>
-                      );
-                    })
-                  }
-                </select>
-              </div>
-            </div>
-
-            <button type="submit" className="btn btn-primary">Submit</button>
-          </form>
-        </div>
+          )
+        }
       </section>
     );
   }

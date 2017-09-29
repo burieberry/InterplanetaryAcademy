@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import store from '../store';
+import store, { removeStudentThunk, showForm } from '../store';
 
 class StudentTable extends Component {
   constructor() {
     super();
     this.state = store.getState();
+    this.onDelete = this.onDelete.bind(this);
+    this.showForm = this.showForm.bind(this);
   }
 
   componentDidMount () {
@@ -15,26 +17,35 @@ class StudentTable extends Component {
     this.unsubscribe();
   }
 
+  onDelete(student) {
+    store.dispatch(removeStudentThunk(student));
+  }
+
+  showForm(form) {
+    store.dispatch(showForm(form));
+  }
+
   render() {
-    const { students, campuses } = this.state;
+    const { students, campuses, form } = this.state;
+    const { onDelete, showForm } = this;
 
     return (
       <section className="col-xs-8">
-        <button className="btn btn-primary pull-right">+</button>
+        <button onClick={ () => showForm(form) } className="btn btn-primary pull-right">+</button>
         <table className="table">
           <thead>
             <tr>
               <th>#</th>
               <th>Name</th>
               <th>Campus</th>
-              <th></th>
+              <th />
             </tr>
           </thead>
           <tbody>
           {
             students.map(student => {
               return (
-                <tr key={ student.id }>
+                <tr key={ student.id } name="student" value={ student }>
                   <td>{ student.id }</td>
                   <td>
                   {
@@ -51,7 +62,7 @@ class StudentTable extends Component {
                     }
                   </td>
                   <td>
-                    <button className="btn btn-xs btn-danger">Delete</button>
+                    <button onClick={ () => onDelete(student) } type="submit" className="btn btn-xs btn-danger">Delete</button>
                   </td>
                 </tr>
               )

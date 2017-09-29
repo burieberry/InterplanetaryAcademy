@@ -8,13 +8,16 @@ import thunk from 'redux-thunk';
 // INITIAL STATE
 const initialState = {
   campuses: [],
-  students: []
+  students: [],
+  form: false
 };
 
 // ACTION TYPE
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_STUDENTS = 'GET_STUDENTS';
 const ADD_STUDENT = 'ADD_STUDENT';
+const REMOVE_STUDENT = 'REMOVE_STUDENT';
+const SHOW_FORM = 'SHOW_FORM';
 
 // ACTION CREATOR
 const getCampuses = (campuses) => {
@@ -37,6 +40,19 @@ const addStudent = (student) => {
     student
   }
 };
+
+const removeStudent = () => {
+  return {
+    type: REMOVE_STUDENT
+  }
+};
+
+export const showForm = (form) => {
+  return {
+    type: SHOW_FORM,
+    form
+  }
+}
 
 // THUNK CREATOR
 export const fetchCampuses = () => {
@@ -63,6 +79,15 @@ export const addStudentThunk = (student) => {
   }
 }
 
+export const removeStudentThunk = (student) => {
+  return dispatch => {
+    return axios.delete(`/api/students/${student.id}`, student)
+      .then(res => res.data)
+      .then(() => dispatch(fetchStudents()))
+      .then(() => dispatch(removeStudent()))
+  }
+}
+
 // REDUCER
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -74,6 +99,12 @@ const reducer = (state = initialState, action) => {
 
     case ADD_STUDENT:
       return Object.assign({}, state, { students: [ ...state.students, action.student ] });
+
+    case REMOVE_STUDENT:
+      return Object.assign({}, state, { students: [ ...state.students ] });
+
+    case SHOW_FORM:
+      return Object.assign({}, state, { form: true });
 
     default:
       return state;

@@ -1,6 +1,6 @@
 import React from 'react';
 import StudentForm from './StudentForm';
-import StudentTable from './StudentTable';
+import StudentTable, { showForm } from './StudentTable';
 
 const Students = (props) => {
   return (
