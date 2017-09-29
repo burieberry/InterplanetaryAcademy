@@ -6,7 +6,7 @@ class StudentForm extends Component {
     super();
     this.state = {
       selectedName: '',
-      selectedCampus: {}
+      selectedCampus: 'Earth'
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -42,10 +42,10 @@ class StudentForm extends Component {
     const { onChange, onSubmit } = this;
 
     return (
-      <section className="col-xs-12">
-        <h2>Add Student</h2>
+      <section className="panel panel-default">
+        <h3 className="panel-heading" style={{ margin: 0 }} >Add Student</h3>
 
-        <form onSubmit={ onSubmit }>
+        <form onSubmit={ onSubmit } className="panel-body">
           <div className="form-group row">
             <label className="col-xs-3 col-form-label">Name: </label>
             <div className="col-xs-8">

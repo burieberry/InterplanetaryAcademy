@@ -32,7 +32,6 @@ class App extends Component {
         <Route exact path="/" render={() => <Campuses campuses={ campuses } />} />
         <Route exact path="/campuses" render={() => <Campuses campuses={ campuses } /> } />
         <Route exact path="/students" render={() => <Students students={ students } campuses={ campuses } /> } />
-        <Route exact path="/students/add" render={ () => <StudentForm campuses={ campuses } /> } />
       </main>
     );
   }
