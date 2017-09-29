@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import StudentForm from './StudentForm';
-import StudentTable, { showForm } from './StudentTable';
+import StudentTable from './StudentTable';
 
 const Students = (props) => {
+  console.log(props)
   return (
     <section className="col-xs-12">
       <h2>Students</h2>
@@ -14,4 +16,12 @@ const Students = (props) => {
   );
 }
 
-export default Students;
+const mapStateToProps = (state) => {
+  return {
+    campuses: state.campuses,
+    students: state.students,
+    form: state.form
+  }
+};
+
+export default connect(mapStateToProps)(Students);

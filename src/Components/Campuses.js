@@ -25,6 +25,6 @@ const Campuses = ({ campuses }) => {
       </ul>
     </section>
   );
-}
+};
 
 export default Campuses;
