@@ -31,6 +31,7 @@ class StudentTable extends Component {
 
     return (
       <section className="col-xs-8">
+        <button onClick={ () => showForm(form) } className="btn btn-info pull-right" style={{ marginLeft: '10px' }}>Edit</button>
         <button onClick={ () => showForm(form) } className="btn btn-primary pull-right">+</button>
         <table className="table">
           <thead>
@@ -47,13 +48,7 @@ class StudentTable extends Component {
               return (
                 <tr key={ student.id } name="student" value={ student }>
                   <td>{ student.id }</td>
-                  <td>
-                  {
-                    student.email ? (
-                      <a href={`mailTo:${ student.email }`}>{ student.name }</a>
-                    ) : student.name
-                  }
-                  </td>
+                  <td>{ student.name }</td>
                   <td>
                     {
                       campuses.filter(campus => campus.id === student.campusId).length ?
