@@ -65,7 +65,7 @@ export const addStudentThunk = (student) => {
 
 // REDUCER
 const reducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_CAMPUSES:
       return Object.assign({}, state, { campuses: action.campuses });
 
@@ -73,7 +73,7 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { students: action.students });
 
     case ADD_STUDENT:
-      return Object.assign({}, state, { students: [ ...state.students, action.student ] })
+      return Object.assign({}, state, { students: [ ...state.students, action.student ] });
 
     default:
       return state;
