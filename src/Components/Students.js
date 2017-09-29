@@ -22,7 +22,13 @@ const Students = ({ students, campuses }) => {
             return (
               <tr key={ student.id }>
                 <td>{ student.id }</td>
-                <td><a href={`mailTo:${ student.email }`}>{ student.name }</a></td>
+                <td>
+                {
+                  student.email ? (
+                    <a href={`mailTo:${ student.email }`}>{ student.name }</a>
+                  ) : student.name
+                }
+                </td>
                 <td>
                   {
                     campuses.filter(campus => campus.id === student.campusId).length ?
