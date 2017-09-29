@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import store, { removeStudentThunk, showForm } from '../store';
+import Student from './Student';
 
 class StudentTable extends Component {
   constructor() {
@@ -27,7 +29,7 @@ class StudentTable extends Component {
   }
 
   getCampus(id) {
-    const { campuses } = this.state;
+    const { campuses } = this.props;
     return campuses.filter(campus => campus.id === id).length ? campuses.filter(campus => campus.id === id)[0].name : '-';
   }
 
@@ -53,7 +55,9 @@ class StudentTable extends Component {
               return (
                 <tr key={ student.id } name="student" value={ student }>
                   <td>{ student.id }</td>
-                  <td>{ student.name }</td>
+                  <td>
+                    <Link to={ `/students/${ student.id }` }>{ student.name }</Link>
+                  </td>
                   <td>{ getCampus(student.campusId) }</td>
                   <td>
                     <button onClick={ () => onDelete(student) } type="submit" className="btn btn-xs btn-danger">Delete</button>
