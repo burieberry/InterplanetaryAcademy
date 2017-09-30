@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addStudentThunk, editForm } from '../store';
 
-const StudentForm = (props) => {
-  const { campuses, form, onChange, onSubmit } = props;
+const StudentForm = ({ campuses, form, onChange, onSubmit }) => {
 
   return (
     <section className="col-xs-4">
@@ -57,7 +56,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onChange(ev) {
       dispatch(editForm(ev.target.value));
