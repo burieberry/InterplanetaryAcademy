@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { removeStudentThunk, showForm } from '../store';
 
 const StudentTable = (props) => {
-  const { students, campuses, form, onDelete, showForm } = props;
+  const { students, campuses, form, onDelete, onAdd } = props;
 
   return (
     <section className="col-xs-8">
-      <button onClick={ () => showForm(form) } className="btn btn-primary pull-right">+</button>
+      <button onClick={ () => onAdd(form) } className="btn btn-primary pull-right">+</button>
       <table className="table">
         <thead>
           <tr>
@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch) => {
     onDelete(student) {
       dispatch(removeStudentThunk(student));
     },
-    showForm(form) {
+    onAdd(form) {
       dispatch(showForm(form));
     }
   }

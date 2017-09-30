@@ -11,12 +11,14 @@ const initialState = {
   students: [],
   form: false,
   campus: 'Earth',
+  student: {},
   input: {}
 };
 
 // ACTION TYPE
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_STUDENTS = 'GET_STUDENTS';
+const GET_STUDENT = 'GET_STUDENT';
 const ADD_STUDENT = 'ADD_STUDENT';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const SHOW_FORM = 'SHOW_FORM';
@@ -34,6 +36,13 @@ const getStudents = (students) => {
   return {
     type: GET_STUDENTS,
     students
+  }
+};
+
+const getStudent = (student) => {
+  return {
+    type: GET_STUDENT,
+    student
   }
 };
 
@@ -80,6 +89,16 @@ export const fetchStudents = () => {
   }
 };
 
+export const fetchStudent = (id) => {
+  return dispatch => {
+    return axios.get(`/api/students/${ id }`)
+      .then(res => res.data)
+      .then(student => {
+        dispatch(getStudent(student));
+      })
+  }
+}
+
 export const addStudentThunk = (student) => {
   return dispatch => {
     return axios.post('/api/students', student)
@@ -105,6 +124,11 @@ const reducer = (state = initialState, action) => {
 
     case GET_STUDENTS:
       return Object.assign({}, state, { students: action.students });
+
+    case GET_STUDENT: {
+      console.log(action.student)
+      return Object.assign({}, state, { student: action.student });
+    }
 
     case ADD_STUDENT:
       return Object.assign({}, state, { students: [ ...state.students, action.student ] });

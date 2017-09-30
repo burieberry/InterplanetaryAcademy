@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
-import store from '../store';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { fetchStudent } from '../store';
 
 class Student extends Component {
-  constructor() {
-    super();
-    this.state = store.getState();
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.fetchStudent(id);
   }
 
-  componentDidMount () {
-    this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
-  }
-
-  componentWillUnmount () {
-    this.unsubscribe();
+  componentWillReceiveProps(nextProps) {
+    // console.log('will receive: ', nextProps);
+    // const { id } = nextProps.match.params;
+    // if (id !== this.props.student.id) {
+      // this.props.fetchStudent(id);
+    // }
   }
 
   render() {
-    const { students, campuses } = this.state;
-
+    const { student, campus } = this.props;
     return (
       <section className="col-xs-4">
         <div className="panel panel-default">
           <div className="panel-heading">
-            { students[0].name }
+            { student.name }
           </div>
           <div className="panel-body">
             <ul className="list-unstyled">
-              <li><a href={`mailTo:${ students[0].email }`}>{ students[0].email }</a></li>
-              <li><strong>Campus:</strong> Earth</li>
+              <li><a href={`mailTo:${ student.email }`}>{ student.email }</a></li>
+              <li><strong>Campus:</strong> { campus }</li>
             </ul>
             <button className="btn btn-info">Edit</button>
           </div>
@@ -37,4 +39,19 @@ class Student extends Component {
   }
 }
 
-export default Student;
+const mapStateToProps = (state) => {
+  return {
+    student: state.student,
+    campus: state.campus
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchStudent(id) {
+      dispatch(fetchStudent(id));
+    }
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Student));
