@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchStudent } from '../store';
+import { fetchStudent, showForm } from '../store';
+import EditStudent from './EditStudent';
 
 class Student extends Component {
-
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchStudent(id);
@@ -19,30 +19,40 @@ class Student extends Component {
   }
 
   render() {
-    const { student, campus } = this.props;
     return (
-      <section className="col-xs-4">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            { student.name }
-          </div>
-          <div className="panel-body">
-            <ul className="list-unstyled">
-              <li><a href={`mailTo:${ student.email }`}>{ student.email }</a></li>
-              <li><strong>Campus:</strong> { campus }</li>
-            </ul>
-            <button className="btn btn-info">Edit</button>
-          </div>
-        </div>
-      </section>
+      <div className="row">
+        <StudentDetail { ...this.props } />
+        <EditStudent { ...this.props } />
+      </div>
     )
   }
 }
 
+const StudentDetail = (props) => {
+  const { student, form, campus, onClick } = props;
+  return (
+    <section className="col-xs-4">
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          { student.name }
+        </div>
+        <div className="panel-body">
+          <ul className="list-unstyled">
+            <li name="email"><a href={`mailTo:${ student.email }`}>{ student.email }</a></li>
+            <li><strong>Campus:</strong> { campus }</li>
+          </ul>
+          <button onClick={() => onClick(form)} className="btn btn-info">Edit</button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const mapStateToProps = (state) => {
   return {
     student: state.student,
-    campus: state.campus
+    campus: state.campus,
+    form: state.form
   }
 };
 
@@ -50,6 +60,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchStudent(id) {
       dispatch(fetchStudent(id));
+    },
+    onClick(form) {
+      dispatch(showForm(form));
     }
   };
 };

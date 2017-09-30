@@ -1,14 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { removeStudentThunk, showForm } from '../store';
+import { removeStudentThunk, showForm, fetchStudents } from '../store';
 
-const StudentTable = (props) => {
-  const { students, campuses, form, onDelete, onAdd } = props;
+class StudentTable extends Component {
+  componentDidMount() {
+    this.props.fetchStudents();
+  }
+
+  render() {
+    return (
+      <StudentTableDetail { ...this.props } />
+    )
+  }
+}
+
+const StudentTableDetail = (props) => {
+  const { students, campuses, form, onDelete, onClick } = props;
 
   return (
     <section className="col-xs-8">
-      <button onClick={ () => onAdd(form) } className="btn btn-primary pull-right">+</button>
+      <button onClick={() => onClick(form)} className="btn btn-primary pull-right">+</button>
       <table className="table">
         <thead>
           <tr>
@@ -33,7 +45,7 @@ const StudentTable = (props) => {
                   }
                 </td>
                 <td>
-                  <button onClick={ () => onDelete(student) } type="submit" className="btn btn-xs btn-danger">Delete</button>
+                  <button onClick={() => onDelete(student)} type="submit" className="btn btn-xs btn-danger">Delete</button>
                 </td>
               </tr>
             )
@@ -58,10 +70,13 @@ const mapDispatchToProps = (dispatch) => {
     onDelete(student) {
       dispatch(removeStudentThunk(student));
     },
-    onAdd(form) {
+    onClick(form) {
       dispatch(showForm(form));
+    },
+    fetchStudents() {
+      dispatch(fetchStudents());
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentTable);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StudentTable));

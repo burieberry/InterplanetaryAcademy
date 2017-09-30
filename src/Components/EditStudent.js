@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addStudentThunk, editForm } from '../store';
+import { editForm, updateStudent } from '../store';
 
 const StudentForm = (props) => {
   const { campuses, form, onChange, onSubmit } = props;
@@ -67,7 +67,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const name = ev.target.name.value;
       const campusId = ev.target.campus.value;
       const email = ev.target.email.value;
-      dispatch(addStudentThunk({ name, email, campusId }));
+      const { id } = ownProps.match.params;
+      dispatch(updateStudent(id, { name, email, campusId }))
     }
   }
 }

@@ -20,6 +20,7 @@ const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
 const ADD_STUDENT = 'ADD_STUDENT';
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const SHOW_FORM = 'SHOW_FORM';
 const EDIT_FORM = 'EDIT_FORM';
@@ -42,6 +43,13 @@ const getStudents = (students) => {
 const getStudent = (student) => {
   return {
     type: GET_STUDENT,
+    student
+  }
+};
+
+const editStudent = (student) => {
+  return {
+    type: UPDATE_STUDENT,
     student
   }
 };
@@ -93,9 +101,16 @@ export const fetchStudent = (id) => {
   return dispatch => {
     return axios.get(`/api/students/${ id }`)
       .then(res => res.data)
-      .then(student => {
-        dispatch(getStudent(student));
-      })
+      .then(student => dispatch(getStudent(student)))
+  }
+}
+
+export const updateStudent = (id, input) => {
+  return dispatch => {
+    return axios.put(`/api/students/${ id }`, input)
+      .then(res => res.data)
+      .then(student => dispatch(editStudent(student)))
+      .then(fetchStudents)
   }
 }
 
@@ -125,13 +140,14 @@ const reducer = (state = initialState, action) => {
     case GET_STUDENTS:
       return Object.assign({}, state, { students: action.students });
 
-    case GET_STUDENT: {
-      console.log(action.student)
+    case GET_STUDENT:
       return Object.assign({}, state, { student: action.student });
-    }
 
     case ADD_STUDENT:
       return Object.assign({}, state, { students: [ ...state.students, action.student ] });
+
+    case UPDATE_STUDENT:
+      return Object.assign({}, state, { student: action.student });
 
     case REMOVE_STUDENT:
       return Object.assign({}, state, { students: [ ...state.students ] });
