@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { editForm, updateStudent } from '../store';
+import { editForm, updateStudent, fetchStudent } from '../store';
 
-const StudentForm = ({ student, campuses, form, onChange, onSubmit }) => {
+// class EditStudent extends Component {
+//   componentDidMount() {
+//     const { id } = this.props.match.params;
+//     this.props.fetchStudent(id);
+//   }
+
+//   componentWillReceiveProps(nextProps) {
+//     const { id } = nextProps.match.params;
+
+//     if (id !== this.props.match.params.id) {
+//       this.props.fetchStudent(id);
+//     }
+//   }
+
+//   render() {
+//     return (
+//       <StudentFormContainer { ...this.props } />
+//     )
+//   }
+// }
+
+const EditStudent = ({ student, campuses, form, onChange, onSubmit }) => {
+  console.log(student)
   return (
     <section className="col-xs-4">
       {
@@ -70,8 +92,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const email = ev.target.email.value;
       const { id } = ownProps.match.params;
       dispatch(updateStudent(id, { name, email, campusId }));
-    }
+    },
+    // fetchStudent(id) {
+    //   dispatch(fetchStudent(id));
+    // }
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StudentForm));
+export default connect(mapStateToProps, mapDispatchToProps)(EditStudent);
