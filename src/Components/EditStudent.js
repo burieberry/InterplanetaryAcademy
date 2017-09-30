@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editForm, updateStudent } from '../store';
+import { editForm, updateStudent, addStudentThunk } from '../store';
 
-const EditStudent = ({ student, campuses, form, onChange, onSubmit }) => {
+const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => {
   return (
     <section className="col-xs-4">
       {
         form && (
           <div className="panel panel-default">
-            <h3 className="panel-heading" style={{ margin: 0 }} >Edit Student</h3>
+            <h3 className="panel-heading" style={{ margin: 0 }} >{ title }</h3>
 
             <form onSubmit={ onSubmit } className="panel-body">
               <div className="form-group row">
@@ -67,11 +67,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     onSubmit(ev) {
       ev.preventDefault();
+      console.log(ownProps)
       const name = ev.target.name.value;
       const email = ev.target.email.value;
       const campusId = ev.target.campusId.value * 1;
       const { id } = ownProps.match.params;
-      dispatch(updateStudent(id, { name,email, campusId }));
+
+      ownProps.title === 'Edit Student' ? dispatch(updateStudent(id, { name, email, campusId })) : dispatch(addStudentThunk({ name, email, campusId }));;
     }
   }
 }

@@ -1,39 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addStudentThunk, editForm } from '../store';
+import { editForm, updateStudent, addStudentThunk } from '../store';
 
-const StudentForm = ({ campuses, form, onChange, onSubmit }) => {
-
+const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => {
   return (
     <section className="col-xs-4">
       {
         form && (
           <div className="panel panel-default">
-            <h3 className="panel-heading" style={{ margin: 0 }} >Add Student</h3>
+            <h3 className="panel-heading" style={{ margin: 0 }} >{ title }</h3>
 
             <form onSubmit={ onSubmit } className="panel-body">
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Name: </label>
                 <div className="col-xs-8">
-                  <input name="name" type="text" onChange={ onChange } className="form-control" />
+                  <input name="name" value={ student.name } onChange={ onChange } className="form-control" />
                 </div>
               </div>
 
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Email: </label>
                 <div className="col-xs-8">
-                  <input name="email" type="text" onChange={ onChange } className="form-control" />
+                  <input name="email" value={ student.email } onChange={ onChange } className="form-control" />
                 </div>
               </div>
 
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Select Campus: </label>
                 <div className="col-xs-8">
-                  <select name="campus" onChange={ onChange } className="form-control">
+                  <select name="campusId" value={ student.campusId * 1 } onChange={ onChange } className="form-control">
                     {
                       campuses.map(campus => {
                         return (
-                          <option value={ campus.id } key={ campus.id }>{ campus.name }</option>
+                          <option value={ campus.id * 1 } key={ campus.id }>{ campus.name }</option>
                         );
                       })
                     }
@@ -52,23 +51,31 @@ const StudentForm = ({ campuses, form, onChange, onSubmit }) => {
 
 const mapStateToProps = (state) => {
   return {
-    campuses: state.campuses
+    campuses: state.campuses,
+    student: state.student,
+    form: state.form
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onChange(ev) {
-      dispatch(editForm(ev.target.value));
+      const change = {};
+      change[ev.target.name] = ev.target.value;
+      const student = Object.assign(ownProps.student, change);
+      dispatch(editForm(student));
     },
     onSubmit(ev) {
       ev.preventDefault();
+      console.log(ownProps)
       const name = ev.target.name.value;
-      const campusId = ev.target.campus.value;
       const email = ev.target.email.value;
-      dispatch(addStudentThunk({ name, email, campusId }));
+      const campusId = ev.target.campusId.value * 1;
+      const { id } = ownProps.match.params;
+
+      ownProps.title === 'Edit Student' ? dispatch(updateStudent(id, { name, email, campusId })) : dispatch(addStudentThunk({ name, email, campusId }));;
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditStudent);

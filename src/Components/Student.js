@@ -5,6 +5,10 @@ import { fetchStudent, showForm } from '../store';
 import EditStudent from './EditStudent';
 
 class Student extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { title: 'Edit Student' };
+  }
 
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -20,10 +24,11 @@ class Student extends Component {
   }
 
   render() {
+    const { title } = this.state;
     return (
       <div className="row">
         <StudentDetail { ...this.props } />
-        <EditStudent { ...this.props } />
+        <EditStudent { ...this.props } title={ title } />
       </div>
     )
   }
@@ -59,7 +64,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchStudent(id) {
       dispatch(fetchStudent(id));
