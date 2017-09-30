@@ -1,29 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { editForm, updateStudent } from '../store';
 
-const StudentForm = (props) => {
-  const { campuses, form, onChange, onSubmit } = props;
-
+const StudentForm = ({ student, campuses, form, onChange, onSubmit }) => {
   return (
     <section className="col-xs-4">
       {
         form && (
           <div className="panel panel-default">
-            <h3 className="panel-heading" style={{ margin: 0 }} >Add Student</h3>
+            <h3 className="panel-heading" style={{ margin: 0 }} >Edit Student</h3>
 
             <form onSubmit={ onSubmit } className="panel-body">
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Name: </label>
                 <div className="col-xs-8">
-                  <input name="name" type="text" onChange={ onChange } className="form-control" />
+                  <input name="name" defaultValue={ student.name } onChange={ onChange } className="form-control" />
                 </div>
               </div>
 
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Email: </label>
                 <div className="col-xs-8">
-                  <input name="email" type="text" onChange={ onChange } className="form-control" />
+                  <input name="email" defaultValue={ student.email } onChange={ onChange } className="form-control" />
                 </div>
               </div>
 
@@ -53,7 +52,9 @@ const StudentForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    campuses: state.campuses
+    campuses: state.campuses,
+    student: state.student,
+    form: state.form
   }
 };
 
@@ -68,9 +69,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const campusId = ev.target.campus.value;
       const email = ev.target.email.value;
       const { id } = ownProps.match.params;
-      dispatch(updateStudent(id, { name, email, campusId }))
+      dispatch(updateStudent(id, { name, email, campusId }));
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StudentForm));

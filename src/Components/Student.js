@@ -11,10 +11,10 @@ class Student extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log('will receive: ', nextProps);
+    console.log('will receive: ', nextProps);
     // const { id } = nextProps.match.params;
     // if (id !== this.props.student.id) {
-      // this.props.fetchStudent(id);
+    //   this.props.fetchStudent(id);
     // }
   }
 
@@ -28,8 +28,7 @@ class Student extends Component {
   }
 }
 
-const StudentDetail = (props) => {
-  const { student, form, campus, onClick } = props;
+const StudentDetail = ({ student, form, campuses, onClick }) => {
   return (
     <section className="col-xs-4">
       <div className="panel panel-default">
@@ -39,7 +38,11 @@ const StudentDetail = (props) => {
         <div className="panel-body">
           <ul className="list-unstyled">
             <li name="email"><a href={`mailTo:${ student.email }`}>{ student.email }</a></li>
-            <li><strong>Campus:</strong> { campus }</li>
+            <li><strong>Campus: </strong>
+              {
+                campuses.filter(campus => campus.id === student.campusId).length ? campuses.filter(campus => campus.id === student.campusId)[0].name : '-'
+              }
+            </li>
           </ul>
           <button onClick={() => onClick(form)} className="btn btn-info">Edit</button>
         </div>
@@ -51,7 +54,7 @@ const StudentDetail = (props) => {
 const mapStateToProps = (state) => {
   return {
     student: state.student,
-    campus: state.campus,
+    campuses: state.campuses,
     form: state.form
   }
 };

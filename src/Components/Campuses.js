@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import { connect } from 'react-redux';
 
 const Campuses = ({ campuses }) => {
   return (
@@ -27,4 +28,10 @@ const Campuses = ({ campuses }) => {
   );
 };
 
-export default Campuses;
+const mapStateToProps = (state) => {
+  return {
+    campuses: state.campuses
+  }
+};
+
+export default connect(mapStateToProps)(Campuses);

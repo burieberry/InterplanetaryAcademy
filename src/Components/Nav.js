@@ -6,6 +6,10 @@ const Nav = ({ router }) => {
   const { pathname } = router.location;
   const tabs = [
     {
+      title: 'Home',
+      path: '/'
+    },
+    {
       title: 'Campuses',
       path: '/campuses'
     },
