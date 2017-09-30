@@ -1,31 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { editForm, updateStudent, fetchStudent } from '../store';
-
-// class EditStudent extends Component {
-//   componentDidMount() {
-//     const { id } = this.props.match.params;
-//     this.props.fetchStudent(id);
-//   }
-
-//   componentWillReceiveProps(nextProps) {
-//     const { id } = nextProps.match.params;
-
-//     if (id !== this.props.match.params.id) {
-//       this.props.fetchStudent(id);
-//     }
-//   }
-
-//   render() {
-//     return (
-//       <StudentFormContainer { ...this.props } />
-//     )
-//   }
-// }
+import { editForm, updateStudent } from '../store';
 
 const EditStudent = ({ student, campuses, form, onChange, onSubmit }) => {
-  console.log(student)
   return (
     <section className="col-xs-4">
       {
@@ -51,7 +28,7 @@ const EditStudent = ({ student, campuses, form, onChange, onSubmit }) => {
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Select Campus: </label>
                 <div className="col-xs-8">
-                  <select name="campus" defaultValue={ student.campusId * 1 } onChange={ onChange } className="form-control">
+                  <select name="campusId" defaultValue={ student.campusId * 1 } onChange={ onChange } className="form-control">
                     {
                       campuses.map(campus => {
                         return (
@@ -88,14 +65,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onSubmit(ev) {
       ev.preventDefault();
       const name = ev.target.name.value;
-      const campusId = ev.target.campus.value * 1;
       const email = ev.target.email.value;
+      const campusId = ev.target.campusId.value * 1;
       const { id } = ownProps.match.params;
-      dispatch(updateStudent(id, { name, email, campusId }));
-    },
-    // fetchStudent(id) {
-    //   dispatch(fetchStudent(id));
-    // }
+      dispatch(updateStudent(id, { name,email, campusId }));
+    }
   }
 }
 

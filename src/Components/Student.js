@@ -44,7 +44,7 @@ const StudentDetail = ({ student, campuses, onClick }) => {
             <li name="email"><a href={`mailTo:${ student.email }`}>{ student.email }</a></li>
             <li><strong>Campus: </strong>{ campusName }</li>
           </ul>
-          <button onClick={ onClick } className="btn btn-info">Edit</button>
+          <button onClick={ () => onClick(student.id) } className="btn btn-info">Edit</button>
         </div>
       </div>
     </section>
@@ -64,8 +64,9 @@ const mapDispatchToProps = (dispatch) => {
     fetchStudent(id) {
       dispatch(fetchStudent(id));
     },
-    onClick() {
+    onClick(id) {
       dispatch(showForm());
+      dispatch(fetchStudent(id));
     }
   };
 };
