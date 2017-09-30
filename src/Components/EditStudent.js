@@ -29,7 +29,7 @@ const StudentForm = ({ student, campuses, form, onChange, onSubmit }) => {
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Select Campus: </label>
                 <div className="col-xs-8">
-                  <select name="campus" onChange={ onChange } className="form-control">
+                  <select name="campus" defaultValue={ student.campusId * 1 } onChange={ onChange } className="form-control">
                     {
                       campuses.map(campus => {
                         return (
