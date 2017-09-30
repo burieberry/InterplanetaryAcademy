@@ -123,7 +123,6 @@ export const fetchStudent = (id) => {
 }
 
 export const updateStudent = (id, input) => {
-  console.log(id, input)
   return dispatch => {
     return axios.put(`/api/students/${ id }`, input)
       .then(res => res.data)
