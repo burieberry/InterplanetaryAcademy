@@ -10,7 +10,6 @@ const initialState = {
   campuses: [],
   students: [],
   form: false,
-  campus: 'Earth',
   student: {},
   input: {}
 };

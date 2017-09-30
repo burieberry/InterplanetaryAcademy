@@ -15,12 +15,10 @@ class StudentTable extends Component {
   }
 }
 
-const StudentTableDetail = (props) => {
-  const { students, campuses, form, onDelete, onClick } = props;
-
+const StudentTableDetail = ({ students, campuses, onDelete, onClick }) => {
   return (
     <section className="col-xs-8">
-      <button onClick={() => onClick(form)} className="btn btn-primary pull-right">+</button>
+      <button onClick={ onClick } className="btn btn-primary pull-right">+</button>
       <table className="table">
         <thead>
           <tr>
@@ -60,8 +58,7 @@ const StudentTableDetail = (props) => {
 const mapStateToProps = (state) => {
   return {
     campuses: state.campuses,
-    students: state.students,
-    form: state.form
+    students: state.students
   }
 };
 
@@ -70,8 +67,8 @@ const mapDispatchToProps = (dispatch) => {
     onDelete(student) {
       dispatch(removeStudentThunk(student));
     },
-    onClick(form) {
-      dispatch(showForm(form));
+    onClick() {
+      dispatch(showForm());
     },
     fetchStudents() {
       dispatch(fetchStudents());

@@ -10,13 +10,13 @@ class Student extends Component {
     this.props.fetchStudent(id);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('will receive: ', nextProps);
+  // componentWillReceiveProps(nextProps) {
+    // console.log('will receive: ', nextProps);
     // const { id } = nextProps.match.params;
     // if (id !== this.props.student.id) {
     //   this.props.fetchStudent(id);
     // }
-  }
+  // }
 
   render() {
     return (
@@ -28,7 +28,7 @@ class Student extends Component {
   }
 }
 
-const StudentDetail = ({ student, form, campuses, onClick }) => {
+const StudentDetail = ({ student, campuses, onClick }) => {
   return (
     <section className="col-xs-4">
       <div className="panel panel-default">
@@ -44,7 +44,7 @@ const StudentDetail = ({ student, form, campuses, onClick }) => {
               }
             </li>
           </ul>
-          <button onClick={() => onClick(form)} className="btn btn-info">Edit</button>
+          <button onClick={ onClick } className="btn btn-info">Edit</button>
         </div>
       </div>
     </section>
@@ -64,8 +64,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchStudent(id) {
       dispatch(fetchStudent(id));
     },
-    onClick(form) {
-      dispatch(showForm(form));
+    onClick() {
+      dispatch(showForm());
     }
   };
 };
