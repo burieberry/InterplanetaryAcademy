@@ -14,21 +14,21 @@ const EditStudent = ({ student, campuses, form, onChange, onSubmit }) => {
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Name: </label>
                 <div className="col-xs-8">
-                  <input name="name" defaultValue={ student.name } onChange={ onChange } className="form-control" />
+                  <input name="name" value={ student.name } onChange={ onChange } className="form-control" />
                 </div>
               </div>
 
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Email: </label>
                 <div className="col-xs-8">
-                  <input name="email" defaultValue={ student.email } onChange={ onChange } className="form-control" />
+                  <input name="email" value={ student.email } onChange={ onChange } className="form-control" />
                 </div>
               </div>
 
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Select Campus: </label>
                 <div className="col-xs-8">
-                  <select name="campusId" defaultValue={ student.campusId * 1 } onChange={ onChange } className="form-control">
+                  <select name="campusId" value={ student.campusId * 1 } onChange={ onChange } className="form-control">
                     {
                       campuses.map(campus => {
                         return (
@@ -60,7 +60,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onChange(ev) {
-      dispatch(editForm(ev.target.value));
+      const change = {};
+      change[ev.target.name] = ev.target.value;
+      const student = Object.assign(ownProps.student, change);
+      dispatch(editForm(student));
     },
     onSubmit(ev) {
       ev.preventDefault();
