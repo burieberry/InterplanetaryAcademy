@@ -16,6 +16,7 @@ const initialState = {
 
 // ACTION TYPE
 const GET_CAMPUSES = 'GET_CAMPUSES';
+const GET_CAMPUS = 'GET_CAMPUS';
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
 const ADD_STUDENT = 'ADD_STUDENT';
@@ -29,6 +30,13 @@ const getCampuses = (campuses) => {
   return {
     type: GET_CAMPUSES,
     campuses
+  }
+};
+
+const getCampus = (campus) => {
+  return {
+    type: GET_CAMPUS,
+    campus
   }
 };
 
@@ -88,6 +96,14 @@ export const fetchCampuses = () => {
   }
 };
 
+export const fetchCampus = (id) => {
+  return dispatch => {
+    return axios.get(`/api/campuses/${ id }`)
+      .then(res => res.data)
+      .then(campus => dispatch(getCampus(campus)))
+  }
+}
+
 export const fetchStudents = () => {
   return dispatch => {
     return axios.get('api/students')
@@ -100,11 +116,14 @@ export const fetchStudent = (id) => {
   return dispatch => {
     return axios.get(`/api/students/${ id }`)
       .then(res => res.data)
-      .then(student => dispatch(getStudent(student)))
+      .then(student => {
+        dispatch(getStudent(student))
+      })
   }
 }
 
 export const updateStudent = (id, input) => {
+  console.log(id, input)
   return dispatch => {
     return axios.put(`/api/students/${ id }`, input)
       .then(res => res.data)
@@ -135,6 +154,9 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CAMPUSES:
       return Object.assign({}, state, { campuses: action.campuses });
+
+    case GET_CAMPUS:
+      return Object.assign({}, state, { campus: action.campus });
 
     case GET_STUDENTS:
       return Object.assign({}, state, { students: action.students });

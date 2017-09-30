@@ -33,7 +33,7 @@ const StudentForm = ({ student, campuses, form, onChange, onSubmit }) => {
                     {
                       campuses.map(campus => {
                         return (
-                          <option value={ campus.id } key={ campus.id }>{ campus.name }</option>
+                          <option value={ campus.id * 1 } key={ campus.id }>{ campus.name }</option>
                         );
                       })
                     }
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onSubmit(ev) {
       ev.preventDefault();
       const name = ev.target.name.value;
-      const campusId = ev.target.campus.value;
+      const campusId = ev.target.campus.value * 1;
       const email = ev.target.email.value;
       const { id } = ownProps.match.params;
       dispatch(updateStudent(id, { name, email, campusId }));
