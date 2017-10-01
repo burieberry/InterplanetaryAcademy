@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const Campuses = ({ campuses }) => {
   return (
-    <section className="col-xs-10">
+    <section className="col-xs-12">
       <h2 style={{ marginBottom: '1.5em' }}>Campuses</h2>
       <ul className="list-unstyled">
         {
