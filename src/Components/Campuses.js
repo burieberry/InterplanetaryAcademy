@@ -24,7 +24,6 @@ const Campuses = ({ campuses }) => {
           })
         }
       </ul>
-    <small className="pull-right">Photos by <a href="http://rickandmorty.wikia.com/">rickandmorty.wikia.com</a></small>
     </section>
   );
 };
