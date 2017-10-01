@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const campusId = ev.target.campusId.value * 1;
       const { id } = ownProps.match.params;
 
-      ownProps.title === 'Edit Student' ? dispatch(updateStudent(id, { name, email, campusId })) : dispatch(addStudentThunk({ name, email, campusId }));;
+      ownProps.title === 'Edit Student' ? dispatch(updateStudent(id, { name, email, campusId })) : dispatch(addStudentThunk({ name, email, campusId }));
     }
   }
 }
