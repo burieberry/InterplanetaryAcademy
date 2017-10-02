@@ -40,13 +40,13 @@ const CampusDetail = ({ campus, students, onClick }) => {
   const studentsArr = students.filter(student => campus.id === student.campusId).length ? students.filter(student => campus.id === student.campusId) : null;
 
   return (
-    <section className="col-xs-8">
+    <section className="col-md-8">
         <div className="campus-panel panel panel-default">
           <div className="panel-body">
-            <div className="col-xs-8">
-              <img src={ campus.image } height="300" />
+            <div className="col-sm-6 col-md-8">
+              <img src={ campus.image } width="100%" />
             </div>
-            <div className="col-xs-4">
+            <div className="col-sm-6 col-md-4">
             <div className="panel panel-default">
               <div className="panel-heading">Current Students:</div>
                 <div className="panel-body">

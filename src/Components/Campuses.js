@@ -11,7 +11,7 @@ const Campuses = ({ campuses }) => {
         {
           campuses.map(campus => {
             return (
-              <li key={ campus.id } className="col-xs-4">
+              <li key={ campus.id } className="col-xs-12 col-sm-6 col-md-4">
                 <Link to={ `/campuses/${ campus.id }` }>
                   <div className="panel panel-default">
                     <h3 className="panel-heading">

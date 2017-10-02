@@ -4,7 +4,7 @@ import { editForm, addStudentThunk, showForm } from '../store';
 
 const EditStudent = ({ student, campuses, form, title, onChange, onSubmit, onClose }) => {
   return (
-    <section className="col-xs-4">
+    <section className="col-xs-12 col-sm-6 col-md-4">
       {
         form && (
           <div className="panel panel-default">

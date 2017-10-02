@@ -40,7 +40,7 @@ const StudentDetail = ({ student, campuses, onClick }) => {
   const campusName = campuses.filter(campus => campus.id === student.campusId).length ? campuses.filter(campus => campus.id === student.campusId)[0].name : '-'
 
   return (
-    <section className="col-xs-4">
+    <section className="col-xs-12 col-sm-6 col-md-4">
       <div className="panel panel-default">
         <div className="panel-heading">
           { student.name }

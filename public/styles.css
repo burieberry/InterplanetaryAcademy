@@ -82,3 +82,10 @@ img {
   padding: 1em;
   margin-left: 2em;
 }
+
+@media screen and (max-width: 850px) {
+  .students-table {
+    padding: 1em;
+    margin-left: 0;
+  }
+}

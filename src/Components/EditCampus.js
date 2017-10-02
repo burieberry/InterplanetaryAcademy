@@ -4,7 +4,7 @@ import { editForm, updateCampus, updateStudent, showForm } from '../store';
 
 const EditCampus = ({ students, campus, form, title, onChange, onSubmit, onClose }) => {
   return (
-    <section className="col-xs-4">
+    <section className="col-xs-12 col-sm-6 col-md-4">
       {
         form && (
           <div className="panel panel-default">
@@ -12,8 +12,8 @@ const EditCampus = ({ students, campus, form, title, onChange, onSubmit, onClose
 
             <form onSubmit={ onSubmit } className="panel-body">
               <div className="form-group row">
-                <label className="col-xs-3 col-form-label">Enroll Students: </label>
-                <div className="col-xs-8">
+                <label className="col-sm-3 col-form-label">Enroll Students: </label>
+                <div className="col-sm-8">
                   <select name="studentId" onChange={ onChange } className="form-control">
                     {
                       students.map(student => {
