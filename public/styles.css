@@ -17,10 +17,6 @@ a:hover {
   margin: 0 auto;
 }
 
-.nav-hed {
-  font-family: 'Fredoka One', cursive;
-}
-
 .page-title {
   color: #fff;
   font-family: 'Amatic SC', cursive;
@@ -51,8 +47,6 @@ a:hover {
 }
 
 .students-table {
-  background: #fff;
-  font-family: 'Fredoka One', cursive;
   padding: 1em;
   margin-left: 2em;
 }
