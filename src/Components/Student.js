@@ -13,6 +13,7 @@ class Student extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchStudent(id);
+    this.props.showForm();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -69,8 +70,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchStudent(id) {
       dispatch(fetchStudent(id));
     },
+    showForm() {
+      dispatch(showForm(false));
+    },
     onClick(id) {
-      dispatch(showForm());
+      dispatch(showForm(true));
       dispatch(fetchStudent(id));
     }
   };

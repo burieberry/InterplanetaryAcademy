@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editForm, updateStudent, addStudentThunk } from '../store';
+import { editForm, updateStudent, showForm } from '../store';
 
 const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => {
   return (
@@ -67,13 +67,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     onSubmit(ev) {
       ev.preventDefault();
-      console.log(ownProps)
       const name = ev.target.name.value;
       const email = ev.target.email.value;
       const campusId = ev.target.campusId.value * 1;
       const { id } = ownProps.match.params;
-
-      ownProps.title === 'Edit Student' ? dispatch(updateStudent(id, { name, email, campusId })) : dispatch(addStudentThunk({ name, email, campusId }));;
+      dispatch(showForm(false));
+      dispatch(updateStudent(id, { name, email, campusId }));
     }
   }
 }

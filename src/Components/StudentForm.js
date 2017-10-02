@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editForm, updateStudent, addStudentThunk } from '../store';
+import { editForm, addStudentThunk, showForm } from '../store';
 
 const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => {
   return (
@@ -52,28 +52,24 @@ const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => 
 const mapStateToProps = (state) => {
   return {
     campuses: state.campuses,
-    student: state.student,
-    form: state.form
+    form: state.form,
+    student: {}
   }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onChange(ev) {
-      const change = {};
-      change[ev.target.name] = ev.target.value;
-      const student = Object.assign(ownProps.student, change);
-      dispatch(editForm(student));
+      const { name } = ev.target;
+      dispatch(editForm({ [name]: ev.target.value }));
     },
     onSubmit(ev) {
       ev.preventDefault();
-      console.log(ownProps)
       const name = ev.target.name.value;
       const email = ev.target.email.value;
       const campusId = ev.target.campusId.value * 1;
-      const { id } = ownProps.match.params;
-
-      ownProps.title === 'Edit Student' ? dispatch(updateStudent(id, { name, email, campusId })) : dispatch(addStudentThunk({ name, email, campusId }));
+      dispatch(showForm(false));
+      dispatch(addStudentThunk({ name, email, campusId }));
     }
   }
 }

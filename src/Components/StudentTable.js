@@ -6,6 +6,7 @@ import { removeStudentThunk, showForm, fetchStudents } from '../store';
 class StudentTable extends Component {
   componentDidMount() {
     this.props.fetchStudents();
+    this.props.showForm();
   }
 
   render() {
@@ -68,7 +69,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(removeStudentThunk(student));
     },
     onClick() {
-      dispatch(showForm());
+      dispatch(showForm(true));
+    },
+    showForm() {
+      dispatch(showForm(false));
     },
     fetchStudents() {
       dispatch(fetchStudents());

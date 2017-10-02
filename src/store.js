@@ -74,9 +74,10 @@ const removeStudent = () => {
   }
 };
 
-export const showForm = () => {
+export const showForm = (toggle) => {
   return {
-    type: SHOW_FORM
+    type: SHOW_FORM,
+    toggle
   }
 }
 
@@ -173,7 +174,7 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { students: [ ...state.students ] });
 
     case SHOW_FORM:
-      return Object.assign({}, state, { form: true });
+      return Object.assign({}, state, { form: action.toggle });
 
     case EDIT_FORM:
       return Object.assign({}, state, { input: action.input });
