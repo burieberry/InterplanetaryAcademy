@@ -22,6 +22,7 @@ const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
 const ADD_STUDENT = 'ADD_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT';
+const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const SHOW_FORM = 'SHOW_FORM';
 const EDIT_FORM = 'EDIT_FORM';
@@ -37,6 +38,13 @@ const getCampuses = (campuses) => {
 const getCampus = (campus) => {
   return {
     type: GET_CAMPUS,
+    campus
+  }
+};
+
+const editCampus = (campus) => {
+  return {
+    type: UPDATE_CAMPUS,
     campus
   }
 };
@@ -106,6 +114,15 @@ export const fetchCampus = (id) => {
   }
 }
 
+export const updateCampus = (id, input) => {
+  return dispatch => {
+    return axios.put(`/api/campuses/${ id }`, input)
+      .then(res => res.data)
+      .then(campus => dispatch(editCampus(campus)))
+      .then(fetchCampuses)
+  }
+}
+
 export const fetchStudents = () => {
   return dispatch => {
     return axios.get('api/students')
@@ -158,6 +175,9 @@ const reducer = (state = initialState, action) => {
 
     case GET_CAMPUS:
       return Object.assign({}, state, { campus: action.campus });
+
+    case UPDATE_CAMPUS:
+      return Object.assign({}, state, { student: action.campus });
 
     case GET_STUDENTS:
       return Object.assign({}, state, { students: action.students });

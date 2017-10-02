@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { fetchCampus, showForm } from '../store';
-// import EditCampus from './EditCampus';
+import { fetchCampus, showForm, fetchStudents } from '../store';
+import EditCampus from './EditCampus';
 
 class Campus extends Component {
   constructor(props) {
     super(props);
-    this.state = { title: 'Edit Campus' };
+    this.state = {
+      title: 'Edit Campus'
+    };
   }
 
   componentDidMount() {
@@ -17,19 +19,18 @@ class Campus extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { id } = nextProps.match.params;
-
-    if (id !== this.props.match.params.id) {
-      this.props.fetchCampus(id);
+    if (nextProps.student.id !== this.props.student.id) {
+      this.props.fetchStudents();
     }
   }
 
   render() {
-    const { title } = this.state;
+    const { campus } = this.props;
     return (
       <div className="row">
-        <CampusDetail { ...this.props } title={ title } />
-
+        <h2 className="section-hed">Campus: { campus.name }</h2>
+        <CampusDetail { ...this.props } />
+        <EditCampus { ...this.props } { ...this.state } />
       </div>
     )
   }
@@ -38,11 +39,8 @@ class Campus extends Component {
 const CampusDetail = ({ campus, students, onClick }) => {
   const studentsArr = students.filter(student => campus.id === student.campusId).length ? students.filter(student => campus.id === student.campusId) : null;
 
-  console.log(studentsArr)
-
   return (
     <section className="col-xs-8">
-      <h2 className="section-hed">Campus: { campus.name }</h2>
         <div className="campus-panel panel panel-default">
           <div className="panel-body">
             <div className="col-xs-8">
@@ -56,7 +54,7 @@ const CampusDetail = ({ campus, students, onClick }) => {
                     {
                       studentsArr ? studentsArr.map(student => {
                         return (
-                          <li key={ student.id }>{ student.name }</li>
+                          <li key={ student.id }>• { student.name }</li>
                         )
                       }) : <li>No enrolled students.</li>
                     }
@@ -66,7 +64,7 @@ const CampusDetail = ({ campus, students, onClick }) => {
             </div>
             <div className="campus-btn-group pull-right">
               <button className="back-btn btn btn-default"><Link to="/campuses"><span className="glyphicon glyphicon-circle-arrow-left" /> Back</Link></button>
-              <button onClick={ () => onClick(campus.id) } className="btn btn-info"> <span className="glyphicon glyphicon-pencil" /> Edit</button>
+              <button onClick={ () => onClick(campus.id) } className="btn btn-info"><span className="glyphicon glyphicon-pencil" /> Edit</button>
             </div>
           </div>
         </div>
@@ -77,6 +75,7 @@ const CampusDetail = ({ campus, students, onClick }) => {
 const mapStateToProps = (state) => {
   return {
     students: state.students,
+    student: state.student,
     campus: state.campus,
     form: state.form
   }
@@ -86,6 +85,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchCampus(id) {
       dispatch(fetchCampus(id));
+    },
+    fetchStudents() {
+      dispatch(fetchStudents());
     },
     showForm() {
       dispatch(showForm(false));
