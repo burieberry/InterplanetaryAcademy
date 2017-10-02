@@ -17,7 +17,7 @@ class StudentTable extends Component {
 
 const StudentTableDetail = ({ students, campuses, onDelete, onClick }) => {
   return (
-    <section className="col-xs-8">
+    <section className="students-table panel col-xs-7">
       <button onClick={ onClick } className="btn btn-primary pull-right">+</button>
       <table className="table">
         <thead>

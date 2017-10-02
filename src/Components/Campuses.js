@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 const Campuses = ({ campuses }) => {
   return (
-    <section className="col-xs-12">
-      <h2 style={{ marginBottom: '1.5em' }}>Campuses</h2>
-      <ul className="list-unstyled">
+    <section className="section col-xs-12">
+      <h2 className="section-hed">Campuses</h2>
+      <ul className="campuses list-unstyled">
         {
           campuses.map(campus => {
             return (
@@ -24,6 +24,7 @@ const Campuses = ({ campuses }) => {
           })
         }
       </ul>
+      <p className="pull-right small text-muted">Photos by <a href="http://rickandmorty.wikia.com/">rickandmorty.wikia.com</a></p>
     </section>
   );
 };

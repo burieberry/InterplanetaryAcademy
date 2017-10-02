@@ -16,12 +16,12 @@ const Nav = ({ router }) => {
   ]
 
   return (
-    <nav className="col-xs-12" style={{ paddingBottom: '18px' }}>
+    <nav className="section col-xs-12">
       <ul className="nav nav-tabs">
         {
           tabs.map(tab => {
             return (
-              <li key={ tab.path } className={ pathname === tab.path ? 'active' : null }>
+              <li key={ tab.path } className={ pathname === tab.path ? 'active nav-hed' : 'nav-hed' }>
                 <Link to={ tab.path }>{ tab.title }</Link>
               </li>
             )

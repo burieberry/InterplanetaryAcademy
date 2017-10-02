@@ -15,22 +15,16 @@ class App extends Component {
 
   render() {
     return (
-      <container>
-        <main className="container">
-          <h1 className="col-xs-12" style={{ fontSize: '34px', paddingBottom: '18px' }}>Margaret Hamilton Interplanetary Academy of JavaScript</h1>
-          <Route render={(router) => <Nav router={ router } />} />
-          <Switch>
-            <Route exact path="/" render={() => <Redirect to="/campuses" />} />
-            <Route exact path="/campuses" component={ Campuses } /> } />
-            <Route exact path="/students" component={ Students } />
-            <Route exact path="/students/:id" component={ Student } />
-          </Switch>
-        </main>
-        <hr />
-        <footer className="container">
-          <p className="pull-right small text-muted">Photos by <a href="http://rickandmorty.wikia.com/">rickandmorty.wikia.com</a></p>
-        </footer>
-      </container>
+      <main className="container">
+        <h1 className="col-xs-12" className="page-title">Margaret Hamilton Interplanetary Academy of JavaScript</h1>
+        <Route render={(router) => <Nav router={ router } />} />
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/campuses" />} />
+          <Route exact path="/campuses" component={ Campuses } /> } />
+          <Route exact path="/students" component={ Students } />
+          <Route exact path="/students/:id" component={ Student } />
+        </Switch>
+      </main>
     );
   }
 }
