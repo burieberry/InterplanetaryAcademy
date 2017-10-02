@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { editForm, addStudentThunk, showForm } from '../store';
 
-const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => {
+const EditStudent = ({ student, campuses, form, title, onChange, onSubmit, onClose }) => {
   return (
     <section className="col-xs-4">
       {
@@ -28,19 +28,22 @@ const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => 
               <div className="form-group row">
                 <label className="col-xs-3 col-form-label">Select Campus: </label>
                 <div className="col-xs-8">
-                  <select name="campusId" value={ student.campusId * 1 } onChange={ onChange } className="form-control">
+                  <select name="campusId" onChange={ onChange } className="form-control">
                     {
                       campuses.map(campus => {
+                        console.log(campus.name, campus.id)
                         return (
-                          <option value={ campus.id * 1 } key={ campus.id }>{ campus.name }</option>
+                          <option value={ campus.id } key={ campus.id }>{ campus.name }</option>
                         );
                       })
                     }
                   </select>
                 </div>
               </div>
-
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <div className="pull-right">
+                <button type="submit" className="btn btn-primary">Submit</button>
+                <button onClick={() => onClose()} className="close-btn btn btn-danger">Close</button>
+              </div>
             </form>
           </div>
         )
@@ -70,6 +73,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const campusId = ev.target.campusId.value * 1;
       dispatch(showForm(false));
       dispatch(addStudentThunk({ name, email, campusId }));
+    },
+    onClose() {
+      dispatch(showForm(false));
     }
   }
 }

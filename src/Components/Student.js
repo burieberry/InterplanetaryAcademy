@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { fetchStudent, showForm } from '../store';
 import EditStudent from './EditStudent';
 
@@ -50,7 +50,11 @@ const StudentDetail = ({ student, campuses, onClick }) => {
             <li name="email"><a href={`mailTo:${ student.email }`}>{ student.email }</a></li>
             <li><strong>Campus: </strong>{ campusName }</li>
           </ul>
-          <button onClick={ () => onClick(student.id) } className="btn btn-info">Edit</button>
+
+          <div className="pull-right">
+            <button className="back-btn btn btn-default"><Link to="/students"><span className="glyphicon glyphicon-circle-arrow-left" /> Back</Link></button>
+            <button onClick={ () => onClick(student.id) } className="btn btn-info"> <span className="glyphicon glyphicon-pencil" /> Edit</button>
+          </div>
         </div>
       </div>
     </section>

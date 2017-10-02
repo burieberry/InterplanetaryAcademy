@@ -34,6 +34,29 @@ img {
   margin-top: 2.5em;
 }
 
+.campus-panel {
+  position: relative;
+}
+
+.back-btn {
+  margin-right: 10px;
+}
+
+.back-btn a {
+  color: #000;
+}
+
+.campus-btn-group {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+.close-btn {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
 .panel {
   background: rgba(255, 255, 255, 0.8);
 }
@@ -44,15 +67,15 @@ img {
 
 .section {
   margin: 0 auto;
-  padding-bottom: 20px;
+  padding: 0 0 20px;
 }
 
 .section-hed {
   color: #fff;
   font-family: 'Amatic SC', cursive;
   font-size: 2.5em;
-  padding-left: 20px;
   margin-bottom: 1em;
+  margin-left: 20px;
 }
 
 .students-table {

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { editForm, updateStudent, showForm } from '../store';
 
-const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => {
+const EditStudent = ({ student, campuses, form, title, onChange, onSubmit, onClose }) => {
   return (
     <section className="col-xs-4">
       {
@@ -40,7 +40,10 @@ const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => 
                 </div>
               </div>
 
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <div className="pull-right">
+                <button type="submit" className="btn btn-primary">Submit</button>
+                <button onClick={() => onClose()} className="close-btn btn btn-danger">Close</button>
+              </div>
             </form>
           </div>
         )
@@ -73,6 +76,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const { id } = ownProps.match.params;
       dispatch(showForm(false));
       dispatch(updateStudent(id, { name, email, campusId }));
+    },
+    onClose() {
+      dispatch(showForm(false));
     }
   }
 }

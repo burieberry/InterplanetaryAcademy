@@ -9,8 +9,9 @@ import thunk from 'redux-thunk';
 const initialState = {
   campuses: [],
   students: [],
-  form: false,
+  campus: {},
   student: {},
+  form: false,
   input: {}
 };
 

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import store, { fetchCampuses, fetchStudents } from '../store';
+
+// Components
 import Nav from './Nav';
 import Campuses from './Campuses';
 import Students from './Students';
+import Campus from './Campus';
 import Student from './Student';
 
 class App extends Component {
@@ -21,6 +24,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/campuses" />} />
           <Route exact path="/campuses" component={ Campuses } /> } />
+          <Route exact path="/campuses/:id" component={ Campus } />
           <Route exact path="/students" component={ Students } />
           <Route exact path="/students/:id" component={ Student } />
         </Switch>

@@ -16,7 +16,7 @@ const Nav = ({ router }) => {
   ]
 
   return (
-    <nav className="section col-xs-12">
+    <nav className="section">
       <ul className="nav nav-tabs">
         {
           tabs.map(tab => {
