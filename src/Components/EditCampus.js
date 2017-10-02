@@ -62,7 +62,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const { id } = ownProps.match.params;
       Promise.all([
         dispatch(showForm(false)),
-        dispatch(updateStudent(studentId, { campusId: id * 1 }))
+        dispatch(updateStudent(studentId, { campusId: id * 1 })),
+        dispatch(updateCampus(id))
       ])
         .catch(console.error)
     },
