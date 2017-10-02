@@ -12,7 +12,7 @@ const Campuses = ({ campuses }) => {
             return (
               <li key={ campus.id } className="col-xs-4">
                 <section className="panel panel-default">
-                  <h3 className="panel-heading" style={{ marginTop: '0' }}>
+                  <h3 className="panel-heading">
                     { campus.name }
                   </h3>
                   <div className="panel-body">

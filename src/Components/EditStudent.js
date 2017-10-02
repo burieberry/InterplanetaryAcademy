@@ -8,7 +8,7 @@ const EditStudent = ({ student, campuses, form, title, onChange, onSubmit }) => 
       {
         form && (
           <div className="panel panel-default">
-            <h3 className="panel-heading" style={{ margin: 0 }} >{ title }</h3>
+            <h3 className="panel-heading">{ title }</h3>
 
             <form onSubmit={ onSubmit } className="panel-body">
               <div className="form-group row">

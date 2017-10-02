@@ -33,6 +33,10 @@ a:hover {
   background: rgba(255, 255, 255, 0.8);
 }
 
+.panel-heading {
+  margin-top: 0;
+}
+
 .section {
   margin: 0 auto;
   padding-bottom: 20px;
