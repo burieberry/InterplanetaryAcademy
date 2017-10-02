@@ -16,7 +16,7 @@ const Campuses = ({ campuses }) => {
                     { campus.name }
                   </h3>
                   <div className="panel-body">
-                    <img src={ campus.image } width="100%" />
+                    <img src={ campus.image } height="175" width="308" />
                   </div>
                 </section>
               </li>
