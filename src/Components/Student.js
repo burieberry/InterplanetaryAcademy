@@ -48,7 +48,7 @@ const StudentDetail = ({ student, campuses, onClick }) => {
         <div className="panel-body">
           <ul className="list-unstyled">
             <li name="email"><a href={`mailTo:${ student.email }`}>{ student.email }</a></li>
-            <li><strong>Campus: </strong>{ campusName }</li>
+            <li><strong>Campus: </strong><Link to={`/campuses/${ student.campusId }`}>{ campusName }</Link></li>
           </ul>
 
           <div className="pull-right">
