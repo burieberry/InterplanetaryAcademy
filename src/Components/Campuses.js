@@ -48,7 +48,7 @@ const CampusesList = (props) => {
                       { campus.name }
                     </h3>
                     <div className="panel-body">
-                      <img src={ campus.image } height="175" width="308" />
+                      <img src={ campus.image || 'https://placeimg.com/616/350/arch' } height="175" width="308" />
                     </div>
                   </div>
                 </Link>
