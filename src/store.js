@@ -20,9 +20,11 @@ const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUS = 'GET_CAMPUS';
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
+const ADD_CAMPUS = 'ADD_CAMPUS';
 const ADD_STUDENT = 'ADD_STUDENT';
-const UPDATE_STUDENT = 'UPDATE_STUDENT';
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
+const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const SHOW_FORM = 'SHOW_FORM';
 const EDIT_FORM = 'EDIT_FORM';
@@ -46,6 +48,19 @@ const editCampus = (campus) => {
   return {
     type: UPDATE_CAMPUS,
     campus
+  }
+};
+
+const addCampus = (campus) => {
+  return {
+    type: ADD_CAMPUS,
+    campus
+  }
+};
+
+const removeCampus = () => {
+  return {
+    type: REMOVE_CAMPUS
   }
 };
 
@@ -123,6 +138,23 @@ export const updateCampus = (id, input) => {
   }
 }
 
+export const addCampusThunk = (campus) => {
+  return dispatch => {
+    return axios.post('/api/campuses', campus)
+      .then(res => res.data)
+      .then(newCampus => dispatch(addCampus(newCampus)))
+  }
+}
+
+export const removeCampusThunk = (campus) => {
+  return dispatch => {
+    return axios.delete(`/api/campuses/${campus.id}`, campus)
+      .then(res => res.data)
+      .then(() => dispatch(fetchCampuses()))
+      .then(() => dispatch(removeCampus()))
+  }
+}
+
 export const fetchStudents = () => {
   return dispatch => {
     return axios.get('api/students')
@@ -178,6 +210,12 @@ const reducer = (state = initialState, action) => {
 
     case UPDATE_CAMPUS:
       return Object.assign({}, state, { student: action.campus });
+
+    case ADD_CAMPUS:
+      return Object.assign({}, state, { campuses: [ ...state.campuses, action.campus ] });
+
+    case REMOVE_CAMPUS:
+      return Object.assign({}, state, { campuses: [ ...state.campuses ] });
 
     case GET_STUDENTS:
       return Object.assign({}, state, { students: action.students });
