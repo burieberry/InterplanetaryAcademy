@@ -31,7 +31,6 @@ const EditStudent = ({ student, campuses, form, title, onChange, onSubmit, onClo
                   <select name="campusId" onChange={ onChange } className="form-control">
                     {
                       campuses.map(campus => {
-                        console.log(campus.name, campus.id)
                         return (
                           <option value={ campus.id } key={ campus.id }>{ campus.name }</option>
                         );

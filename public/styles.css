@@ -30,6 +30,16 @@ img {
   padding-bottom: 20px;
 }
 
+.campus-add-btn {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+
+.campus-add-form {
+  margin: 0 auto;
+}
+
 .campuses {
   margin-top: 2.5em;
 }
@@ -55,6 +65,12 @@ img {
 .close-btn {
   margin-left: 5px;
   margin-right: 10px;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 15px;
+  right: 30px;
 }
 
 .panel {

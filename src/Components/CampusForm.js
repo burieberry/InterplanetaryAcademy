@@ -4,7 +4,7 @@ import { editForm, addCampusThunk, showForm } from '../store';
 
 const AddCampus = ({ campus, form, title, onChange, onSubmit, onClose }) => {
   return (
-    <section className="col-xs-12 col-sm-6 col-md-4">
+    <section className="col-xs-12 col-sm-6">
       {
         form && (
           <div className="panel panel-default">
@@ -19,7 +19,7 @@ const AddCampus = ({ campus, form, title, onChange, onSubmit, onClose }) => {
               </div>
 
               <div className="form-group row">
-                <label className="col-xs-3 col-form-label">Photo: </label>
+                <label className="col-xs-3 col-form-label">Image URL: </label>
                 <div className="col-xs-8">
                   <input name="image" value={ campus.image } onChange={ onChange } className="form-control" />
                 </div>
