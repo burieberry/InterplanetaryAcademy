@@ -63,7 +63,7 @@ const CampusDetail = ({ campus, students, onClick }) => {
               </div>
             </div>
             <div className="campus-btn-group pull-right">
-              <button className="back-btn btn btn-default"><Link to="/campuses"><span className="glyphicon glyphicon-circle-arrow-left" /> Back</Link></button>
+              <Link to="/campuses"><button className="back-btn btn btn-default"><span className="glyphicon glyphicon-circle-arrow-left" /> Back</button></Link>
               <button onClick={ () => onClick(campus.id) } className="btn btn-info"><span className="glyphicon glyphicon-pencil" /> Edit</button>
             </div>
           </div>
