@@ -54,7 +54,7 @@ const CampusDetail = ({ campus, students, onClick }) => {
                     {
                       studentsArr ? studentsArr.map(student => {
                         return (
-                          <li key={ student.id }>• { student.name }</li>
+                          <li key={ student.id }>• <Link to={`/students/${ student.id }`}>{ student.name }</Link></li>
                         )
                       }) : <li>No enrolled students.</li>
                     }
