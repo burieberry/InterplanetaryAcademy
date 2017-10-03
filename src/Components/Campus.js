@@ -44,7 +44,7 @@ const CampusDetail = ({ campus, students, onClick }) => {
         <div className="campus-panel panel panel-default">
           <div className="panel-body">
             <div className="col-sm-6 col-md-8">
-              <img src={ campus.image } width="100%" />
+              <img src={ campus.image || 'https://placeimg.com/616/350/arch' } width="100%" />
             </div>
             <div className="col-sm-6 col-md-4">
             <div className="panel panel-default">
